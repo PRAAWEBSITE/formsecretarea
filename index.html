@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECRET AREA - Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #121212;
+            --bg-light: #FFF9E3;
+            --text-dark: #E0C15A;
+            --text-light: #7C6B00;
+            --gold: #FFD700;
+            --gold-soft: #E6C15A;
+            --input-bg-dark: #1E1E2F;
+            --input-bg-light: #FFFFFF;
+            --border-dark: #333;
+            --border-light: #DDD;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        body.light-mode {
+            background: var(--bg-light);
+            color: var(--text-light);
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .form-container {
+            background: rgba(30, 30, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(124, 107, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(124, 107, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--gold-soft);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            background: var(--input-bg-dark);
+            color: var(--text-dark);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        body.light-mode .form-control {
+            background: var(--input-bg-light);
+            color: var(--text-light);
+            border-color: var(--border-light);
+        }
+
+        .form-control:focus,
+        .form-control:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .admin-selection {
+            margin: 20px 0;
+        }
+
+        .admin-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .admin-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .admin-option input[type="radio"] {
+            display: none;
+        }
+
+        .admin-label {
+            display: block;
+            padding: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(30, 30, 47, 0.5);
+        }
+
+        body.light-mode .admin-label {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .admin-option input[type="radio"]:checked + .admin-label {
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            color: #000;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .admin-label:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .note {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            color: var(--gold-soft);
+            font-weight: 500;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--gold);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            color: #000;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .submit-btn.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .submit-btn.active:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: var(--gold-soft);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .admin-options {
+                flex-direction: column;
+            }
+        }
+
+        /* Enhanced Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-content {
+            text-align: center;
+            color: var(--gold);
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 215, 0, 0.2);
+            border-top: 4px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            font-size: 18px;
+            font-weight: 600;
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Particle Effects */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold), transparent);
+            animation: particleFloat 2s ease-out forwards;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: scale(0) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1) translateY(-100px);
+            }
+        }
+
+        /* Form Focus State Enhancement */
+        .form-group.focused {
+            transform: translateY(-2px);
+        }
+
+        .form-group.focused label {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: labelGlow 0.3s ease-out;
+        }
+
+        @keyframes labelGlow {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Enhanced Error Messages */
+        .error-message {
+            color: #ff4757;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+            animation: errorSlideIn 0.3s ease-out;
+            background: rgba(255, 71, 87, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border-left: 3px solid #ff4757;
+        }
+
+        @keyframes errorSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Interactive Hover Effects */
+        .form-container:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.2);
+        }
+
+        /* Success Animation for Form Completion */
+        .form-success {
+            animation: formSuccess 0.6s ease-out;
+        }
+
+        @keyframes formSuccess {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Mobile Enhancements */
+        @media (max-width: 768px) {
+            .snowflake, .crystal {
+                font-size: 12px !important;
+            }
+            
+            .form-container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .admin-options {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .theme-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+
+        /* Advanced Visual Effects */
+        .golden-trail {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: trailFade 0.5s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Snow & Crystal Animation */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: rgba(255, 215, 0, 0.7);
+            user-select: none;
+            pointer-events: none;
+            animation: snowfall linear infinite;
+        }
+
+        .crystal {
+            position: absolute;
+            top: -10px;
+            color: rgba(224, 193, 90, 0.8);
+            user-select: none;
+            pointer-events: none;
+            animation: crystalfall linear infinite;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes crystalfall {
+            0% {
+                transform: translateY(-100px) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Form Animations */
+        .form-container {
+            background: rgba(30, 30, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: containerSlideIn 0.8s ease-out;
+        }
+
+        @keyframes containerSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            background: var(--input-bg-dark);
+            color: var(--text-dark);
+            font-size: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+            position: relative;
+        }
+
+        .form-control:focus,
+        .form-control:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4), 0 0 50px rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px) scale(1.02);
+            background: rgba(30, 30, 47, 0.9);
+        }
+
+        .form-control:focus {
+            animation: inputPulse 0.6s ease-in-out;
+        }
+
+        @keyframes inputPulse {
+            0%, 100% {
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(255, 215, 0, 0.6), 0 0 70px rgba(255, 215, 0, 0.2);
+            }
+        }
+
+        /* Enhanced Admin Selection Animation */
+        .admin-selection {
+            margin: 20px 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: 0.6s;
+            opacity: 0;
+        }
+
+        .admin-label {
+            display: block;
+            padding: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(30, 30, 47, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .admin-label:hover::before {
+            left: 100%;
+        }
+
+        .admin-label:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .admin-option input[type="radio"]:checked + .admin-label {
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            color: #000;
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            transform: scale(1.05);
+            animation: radioSelected 0.5s ease-out;
+        }
+
+        @keyframes radioSelected {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Enhanced Submit Button Animation */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            color: #000;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 20px;
+            opacity: 0.5;
+            pointer-events: none;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .submit-btn.active {
+            opacity: 1;
+            pointer-events: auto;
+            animation: buttonActivate 0.5s ease-out;
+        }
+
+        @keyframes buttonActivate {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(255, 215, 0, 0);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            }
+        }
+
+        .submit-btn.active:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(135deg, #FFE55C, #F4D03F);
+        }
+
+        .submit-btn.active:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        /* Enhanced Theme Toggle Animation */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            animation: themeToggleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes themeToggleFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-5px) rotate(5deg);
+            }
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Enhanced Checkbox Animation */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: 0.7s;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-group input[type="checkbox"]:checked {
+            animation: checkboxBounce 0.3s ease-out;
+        }
+
+        @keyframes checkboxBounce {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .checkbox-group:hover {
+            transform: translateX(5px);
+        }
+
+        /* Enhanced Note Animation */
+        .note {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            color: var(--gold-soft);
+            font-weight: 500;
+            animation: fadeInUp 0.6s ease-out forwards, notePulse 2s ease-in-out infinite;
+            animation-delay: 0.65s, 2s;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes notePulse {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        /* Title Animation Enhancement */
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+                transform: scale(1);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.3);
+                transform: scale(1.02);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snow-container" id="snowContainer"></div>
+    
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Menghubungkan ke WhatsApp...</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <h1 class="title">SECRET AREA</h1>
+            <p class="subtitle">Form Pendaftaran Eksklusif</p>
+            
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">Nama Lengkap *</label>
+                    <input type="text" id="fullName" class="form-control" required>
+                    <div class="error-message" id="fullNameError">Nama lengkap wajib diisi</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gameId">ID Game *</label>
+                    <input type="text" id="gameId" class="form-control" required>
+                    <div class="error-message" id="gameIdError">ID Game wajib diisi</div>
+                </div>
+
+                <div class="form-group">
+                    
+                    <label for="domicile">Domisili *</label>
+                    
+                    <input type="text" id="domicile" class="form-control" required>
+                    <div class="error-message" id="domicileError">Domisili wajib diisi
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Usia *</label>
+                    <input type="number" id="age" class="form-control" min="18" max="100" required>
+                    <div class="error-message" id="ageError">Usia harus antara 13-100 tahun</div>
+                </div>
+
+                <div class="form-group">
+    <label for="gender">Jenis Kelamin *</label>
+    <select id="gender" class="form-control" required>
+        <option value="">-- Pilih Jenis Kelamin --</option>
+        <option value="Laki-laki">Laki-laki</option>
+        <option value="Perempuan">Perempuan</option>
+    </select>
+    <div class="error-message" id="genderError">Jenis kelamin wajib dipilih</div>
+</div>
+
+
+                <div class="form-group">
+                    <label for="tiktokLink">Link TikTok *</label>
+                    <input type="url" id="tiktokLink" class="form-control" placeholder="https://www.tiktok.com/@username" required>
+                    <div class="error-message" id="tiktokError">Link TikTok harus valid</div>
+                </div>
+
+                <div class="admin-selection">
+                    <label>Pilih Admin WhatsApp *</label>
+                    <div class="admin-options">
+                        <div class="admin-option">
+                            <input type="radio" id="admin1" name="admin" value="+6287732771561" required>
+                            <label for="admin1" class="admin-label">Admin 1</label>
+                        </div>
+                        <div class="admin-option">
+                            <input type="radio" id="admin2" name="admin" value="+6285272535526" required>
+                            <label for="admin2" class="admin-label">Admin 2</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="note">
+                    ⭐ Wajib mengikuti semua Social Media SECRET AREA
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreement" required>
+                    <label for="agreement">Saya sudah mengikuti semua ketentuan pendaftaran</label>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Daftar Sekarang
+                </button>
+            </form>
+        </div>
+        
+        <div class="footer">
+            © SECRET AREA
+        </div>
+    </div>
+
+    <script>
+        // Enhanced particle effects
+        function createParticles(element) {
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 6 + 4;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                const rect = element.getBoundingClientRect();
+                particle.style.left = (rect.left + Math.random() * rect.width) + 'px';
+                particle.style.top = (rect.top + rect.height / 2) + 'px';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (document.body.contains(particle)) {
+                        document.body.removeChild(particle);
+                    }
+                }, 2000);
+            }
+        }
+
+        // Mouse trail effect
+        let mouseTrail = [];
+        document.addEventListener('mousemove', function(e) {
+            if (mouseTrail.length > 10) {
+                const oldTrail = mouseTrail.shift();
+                if (document.body.contains(oldTrail)) {
+                    document.body.removeChild(oldTrail);
+                }
+            }
+            
+            const trail = document.createElement('div');
+            trail.className = 'golden-trail';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            
+            document.body.appendChild(trail);
+            mouseTrail.push(trail);
+            
+            setTimeout(() => {
+                if (document.body.contains(trail)) {
+                    document.body.removeChild(trail);
+                }
+            }, 500);
+        });
+
+        // Snow and Crystal Animation
+        function createSnowflake() {
+            const snowContainer = document.getElementById('snowContainer');
+            const snowflake = document.createElement('div');
+            
+            // Randomly choose between snow and crystal
+            const isSnow = Math.random() > 0.3;
+            
+            if (isSnow) {
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = ['❄', '❅', '❆', '✻', '✼', '❉'][Math.floor(Math.random() * 6)];
+            } else {
+                snowflake.className = 'crystal';
+                snowflake.innerHTML = ['◊', '◈', '♦', '⬙', '⬠', '⟐'][Math.floor(Math.random() * 6)];
+            }
+            
+            // Random size
+            const size = Math.random() * 15 + 10;
+            snowflake.style.fontSize = size + 'px';
+            
+            // Random horizontal position
+            snowflake.style.left = Math.random() * 100 + '%';
+            
+            // Random animation duration
+            const duration = Math.random() * 8 + 5;
+            snowflake.style.animationDuration = duration + 's';
+            
+            // Random delay
+            snowflake.style.animationDelay = Math.random() * 2 + 's';
+            
+            snowContainer.appendChild(snowflake);
+            
+            // Remove snowflake after animation
+            setTimeout(() => {
+                if (snowContainer.contains(snowflake)) {
+                    snowContainer.removeChild(snowflake);
+                }
+            }, (duration + 2) * 1000);
+        }
+
+        // Create snowflakes continuously
+        function startSnowfall() {
+            setInterval(createSnowflake, 200);
+        }
+
+        // Start snowfall when page loads
+        document.addEventListener('DOMContentLoaded', startSnowfall);
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const toggleBtn = document.querySelector('.theme-toggle');
+            
+            // Add rotation animation
+            toggleBtn.style.transform = 'scale(1.2) rotate(360deg)';
+            
+            setTimeout(() => {
+                body.classList.toggle('light-mode');
+                
+                if (body.classList.contains('light-mode')) {
+                    toggleBtn.innerHTML = '☀️';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    toggleBtn.innerHTML = '🌙';
+                    localStorage.setItem('theme', 'dark');
+                }
+                
+                // Reset transform
+                setTimeout(() => {
+                    toggleBtn.style.transform = '';
+                }, 100);
+            }, 200);
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                document.querySelector('.theme-toggle').innerHTML = '☀️';
+            }
+        });
+
+        // Enhanced form validation with animations
+        function validateForm() {
+            const form = document.getElementById('registrationForm');
+            const submitBtn = document.getElementById('submitBtn');
+            let isValid = true;
+
+            // Get all required fields
+            const fullName = document.getElementById('fullName');
+            const gameId = document.getElementById('gameId');
+            const domicile = document.getElementById('domicile');
+            const age = document.getElementById('age');
+            const tiktokLink = document.getElementById('tiktokLink');
+            const admin = document.querySelector('input[name="admin"]:checked');
+            const agreement = document.getElementById('agreement');
+
+            // Validate each field with enhanced animations
+            if (!fullName.value.trim()) {
+                showError('fullNameError');
+                addErrorShake(fullName);
+                isValid = false;
+            } else {
+                hideError('fullNameError');
+                addSuccessGlow(fullName);
+            }
+
+            if (!gameId.value.trim()) {
+                showError('gameIdError');
+                addErrorShake(gameId);
+                isValid = false;
+            } else {
+                hideError('gameIdError');
+                addSuccessGlow(gameId);
+            }
+
+            if (!domicile.value.trim()) {
+                showError('domicileError');
+                addErrorShake(domicile);
+                isValid = false;
+            } else {
+                hideError('domicileError');
+                addSuccessGlow(domicile);
+            }
+
+            if (!age.value || age.value < 13 || age.value > 100) {
+                showError('ageError');
+                addErrorShake(age);
+                isValid = false;
+            } else {
+                hideError('ageError');
+                addSuccessGlow(age);
+            }
+
+            if (!tiktokLink.value || !isValidUrl(tiktokLink.value)) {
+                showError('tiktokError');
+                addErrorShake(tiktokLink);
+                isValid = false;
+            } else {
+                hideError('tiktokError');
+                addSuccessGlow(tiktokLink);
+            }
+
+            // Check if admin is selected and agreement is checked
+            if (admin && agreement.checked && isValid) {
+                submitBtn.classList.add('active');
+            } else {
+                submitBtn.classList.remove('active');
+            }
+        }
+
+        function addErrorShake(element) {
+            element.style.animation = 'shake 0.5s ease-in-out';
+            element.style.borderColor = '#ff4757';
+            setTimeout(() => {
+                element.style.animation = '';
+            }, 500);
+        }
+
+        function addSuccessGlow(element) {
+            element.style.borderColor = 'var(--gold)';
+            element.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.3)';
+        }
+
+        // Add shake animation CSS
+        const shakeCSS = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = shakeCSS;
+        document.head.appendChild(styleSheet);
+
+        function showError(errorId) {
+            const errorElement = document.getElementById(errorId);
+            errorElement.style.display = 'block';
+            errorElement.style.animation = 'fadeInUp 0.3s ease-out';
+        }
+
+        function hideError(errorId) {
+            document.getElementById(errorId).style.display = 'none';
+        }
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Enhanced event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const inputs = form.querySelectorAll('input');
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', validateForm);
+                input.addEventListener('change', validateForm);
+                
+                // Add focus animations
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                    createParticles(this);
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focused');
+                });
+            });
+
+            // Add admin selection animations
+            const adminLabels = document.querySelectorAll('.admin-label');
+            adminLabels.forEach(label => {
+                label.addEventListener('click', function() {
+                    createParticles(this);
+                });
+            });
+
+            // Add checkbox animation
+            const checkbox = document.getElementById('agreement');
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    createParticles(this);
+                    this.parentElement.style.animation = 'checkboxBounce 0.3s ease-out';
+                }
+            });
+
+            // Enhanced form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = document.getElementById('submitBtn');
+                if (!submitBtn.classList.contains('active')) {
+                    return;
+                }
+
+                // Enhanced loading animation
+                const formContainer = document.querySelector('.form-container');
+                formContainer.classList.add('form-success');
+                document.getElementById('loadingOverlay').style.display = 'flex';
+                submitBtn.innerHTML = 'Mengirim...';
+                submitBtn.style.transform = 'scale(0.95)';
+                createParticles(submitBtn);
+
+                // Get form data
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    gameId: document.getElementById('gameId').value,
+                    domicile: document.getElementById('domicile').value,
+                    age: document.getElementById('age').value,
+                    tiktokLink: document.getElementById('tiktokLink').value,
+                    admin: document.querySelector('input[name="admin"]:checked').value
+                };
+
+                // Create WhatsApp message
+                const message = `Halo Admin, saya ingin mendaftar SECRET AREA dengan data berikut:
+
+Nama Lengkap: ${formData.fullName}
+ID Game: ${formData.gameId}
+Domisili: ${formData.domicile}
+
+Usia: ${formData.age}
+Jenis Kelamin: ${formData.Jenis}
+Link TikTok: ${formData.tiktokLink}
+
+Terima kasih!`;
+
+                // Create WhatsApp URL
+                const whatsappUrl = `https://wa.me/${formData.admin}?text=${encodeURIComponent(message)}`;
+
+                // Redirect with enhanced animation
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                    submitBtn.innerHTML = 'Berhasil! 🎉';
+                    submitBtn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+                    
+                    setTimeout(() => {
+                        window.open(whatsappUrl, '_blank');
+                        
+                        // Reset button after redirect
+                        setTimeout(() => {
+                            submitBtn.innerHTML = 'Daftar Sekarang';
+                            submitBtn.style.background = 'linear-gradient(135deg, var(--gold), var(--gold-soft))';
+                            submitBtn.style.transform = '';
+                        }, 2000);
+                    }, 1000);
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
