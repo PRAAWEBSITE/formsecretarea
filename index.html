@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SECRET AREA - Registration</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,18 +19,17 @@
             --text-light: #7C6B00;
             --gold: #FFD700;
             --gold-soft: #E6C15A;
-            --input-bg-dark: #1E1E2F;
-            --input-bg-light: #FFFFFF;
-            --border-dark: #333;
-            --border-light: #DDD;
+            --crystal: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
             background: var(--bg-dark);
             color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
         body.light-mode {
@@ -38,470 +37,28 @@
             color: var(--text-light);
         }
 
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .theme-toggle {
+        /* Snow Animation */
+        .snow {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .form-container {
-            background: rgba(30, 30, 47, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        body.light-mode .form-container {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(124, 107, 0, 0.1);
-            box-shadow: 0 20px 40px rgba(124, 107, 0, 0.1);
-        }
-
-        .title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-        }
-
-        .subtitle {
-            text-align: center;
-            margin-bottom: 30px;
-            opacity: 0.8;
-            font-weight: 300;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--gold-soft);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            background: var(--input-bg-dark);
-            color: var(--text-dark);
-            font-size: 16px;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        body.light-mode .form-control {
-            background: var(--input-bg-light);
-            color: var(--text-light);
-            border-color: var(--border-light);
-        }
-
-        .form-control:focus,
-        .form-control:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .admin-selection {
-            margin: 20px 0;
-        }
-
-        .admin-options {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .admin-option {
-            flex: 1;
-            position: relative;
-        }
-
-        .admin-option input[type="radio"] {
-            display: none;
-        }
-
-        .admin-label {
-            display: block;
-            padding: 15px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(30, 30, 47, 0.5);
-        }
-
-        body.light-mode .admin-label {
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .admin-option input[type="radio"]:checked + .admin-label {
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            color: #000;
-            border-color: var(--gold);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-        }
-
-        .admin-label:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-        }
-
-        .note {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            color: var(--gold-soft);
-            font-weight: 500;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--gold);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            color: #000;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .submit-btn.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .submit-btn.active:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
-        }
-
-        .error-message {
-            color: #ff4757;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: var(--gold-soft);
-            font-size: 14px;
-            opacity: 0.7;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .form-container {
-                padding: 25px;
-            }
-            
-            .title {
-                font-size: 2rem;
-            }
-            
-            .admin-options {
-                flex-direction: column;
-            }
-        }
-
-        /* Enhanced Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
+            top: -100px;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            backdrop-filter: blur(10px);
-        }
-
-        .loading-content {
-            text-align: center;
-            color: var(--gold);
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 215, 0, 0.2);
-            border-top: 4px solid var(--gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        .loading-text {
-            font-size: 18px;
-            font-weight: 600;
-            animation: loadingPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes loadingPulse {
-            0%, 100% {
-                opacity: 0.7;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-        }
-
-        /* Particle Effects */
-        .particle {
-            position: absolute;
-            pointer-events: none;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--gold), transparent);
-            animation: particleFloat 2s ease-out forwards;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                opacity: 1;
-                transform: scale(0) translateY(0);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1) translateY(-100px);
-            }
-        }
-
-        /* Form Focus State Enhancement */
-        .form-group.focused {
-            transform: translateY(-2px);
-        }
-
-        .form-group.focused label {
-            color: var(--gold);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            animation: labelGlow 0.3s ease-out;
-        }
-
-        @keyframes labelGlow {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* Enhanced Error Messages */
-        .error-message {
-            color: #ff4757;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-            animation: errorSlideIn 0.3s ease-out;
-            background: rgba(255, 71, 87, 0.1);
-            padding: 5px 10px;
-            border-radius: 5px;
-            border-left: 3px solid #ff4757;
-        }
-
-        @keyframes errorSlideIn {
-            0% {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Interactive Hover Effects */
-        .form-container:hover {
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 215, 0, 0.2);
-        }
-
-        /* Success Animation for Form Completion */
-        .form-success {
-            animation: formSuccess 0.6s ease-out;
-        }
-
-        @keyframes formSuccess {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.02);
-                box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* Mobile Enhancements */
-        @media (max-width: 768px) {
-            .snowflake, .crystal {
-                font-size: 12px !important;
-            }
-            
-            .form-container {
-                padding: 25px;
-                margin: 10px;
-            }
-            
-            .title {
-                font-size: 2rem;
-            }
-            
-            .admin-options {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .theme-toggle {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
-        }
-
-        /* Advanced Visual Effects */
-        .golden-trail {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--gold);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: trailFade 0.5s ease-out forwards;
-        }
-
-        @keyframes trailFade {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0);
-            }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Snow & Crystal Animation */
-        .snow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            height: 100vh;
             pointer-events: none;
             z-index: 1;
-            overflow: hidden;
         }
 
         .snowflake {
             position: absolute;
-            top: -10px;
-            color: rgba(255, 215, 0, 0.7);
-            user-select: none;
-            pointer-events: none;
-            animation: snowfall linear infinite;
+            color: var(--gold);
+            font-size: 1em;
+            animation: fall linear infinite;
+            opacity: 0.8;
         }
 
-        .crystal {
-            position: absolute;
-            top: -10px;
-            color: rgba(224, 193, 90, 0.8);
-            user-select: none;
-            pointer-events: none;
-            animation: crystalfall linear infinite;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-
-        @keyframes snowfall {
+        @keyframes fall {
             0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 0;
-            }
-            5% {
-                opacity: 1;
-            }
-            95% {
+                transform: translateY(-100vh) rotate(0deg);
                 opacity: 1;
             }
             100% {
@@ -510,188 +67,344 @@
             }
         }
 
-        @keyframes crystalfall {
-            0% {
-                transform: translateY(-100px) rotate(0deg) scale(0.8);
-                opacity: 0;
-            }
-            5% {
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(50vh) rotate(180deg) scale(1.2);
-            }
-            95% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg) scale(0.8);
-                opacity: 0;
-            }
-        }
-
-        /* Enhanced Form Animations */
-        .form-container {
-            background: rgba(30, 30, 47, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            transition: all 0.3s ease;
-            animation: containerSlideIn 0.8s ease-out;
-        }
-
-        @keyframes containerSlideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(50px) scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .form-group:nth-child(1) { animation-delay: 0.1s; }
-        .form-group:nth-child(2) { animation-delay: 0.2s; }
-        .form-group:nth-child(3) { animation-delay: 0.3s; }
-        .form-group:nth-child(4) { animation-delay: 0.4s; }
-        .form-group:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .form-control {
+        /* Crystal Frame */
+        .crystal-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 15px 20px;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            background: var(--input-bg-dark);
-            color: var(--text-dark);
-            font-size: 16px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            outline: none;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .crystal-frame::before,
+        .crystal-frame::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(45deg, transparent 30%, var(--crystal) 50%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .crystal-frame::before {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .crystal-frame::after {
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(0deg, transparent, var(--gold), transparent);
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .theme-toggle svg {
+            width: 30px;
+            height: 30px;
+            fill: #121212;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
             position: relative;
         }
 
-        .form-control:focus,
-        .form-control:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4), 0 0 50px rgba(255, 215, 0, 0.1);
-            transform: translateY(-3px) scale(1.02);
-            background: rgba(30, 30, 47, 0.9);
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
         }
 
-        .form-control:focus {
-            animation: inputPulse 0.6s ease-in-out;
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            letter-spacing: 1px;
         }
 
-        @keyframes inputPulse {
-            0%, 100% {
-                box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 35px rgba(255, 215, 0, 0.6), 0 0 70px rgba(255, 215, 0, 0.2);
-            }
-        }
-
-        /* Enhanced Admin Selection Animation */
-        .admin-selection {
-            margin: 20px 0;
-            animation: fadeInUp 0.6s ease-out forwards;
-            animation-delay: 0.6s;
-            opacity: 0;
-        }
-
-        .admin-label {
-            display: block;
-            padding: 15px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(30, 30, 47, 0.5);
+        /* Form Container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
 
-        .admin-label::before {
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--gold), transparent, var(--gold-soft), transparent);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .light-mode .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(124, 107, 0, 0.2);
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .light-mode .form-group input,
+        .light-mode .form-group select {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-light);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .form-group input:hover,
+        .form-group select:hover {
+            border-color: var(--gold-soft);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Error Messages */
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Note */
+        .note {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Checkbox */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            cursor: pointer;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            accent-color: var(--gold);
+        }
+
+        /* Admin Selection */
+        .admin-selection {
+            margin: 25px 0;
+        }
+
+        .admin-selection h3 {
+            margin-bottom: 20px;
+            color: var(--gold);
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .radio-item {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .radio-item input[type="radio"] {
+            display: none;
+        }
+
+        .radio-item label {
+            display: block;
+            cursor: pointer;
+        }
+
+        .admin-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
-            transition: left 0.6s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
         }
 
-        .admin-label:hover::before {
+        .admin-card:hover::before {
             left: 100%;
         }
 
-        .admin-label:hover {
+        .admin-card:hover {
             border-color: var(--gold);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.3);
+            transform: translateY(-3px);
         }
 
-        .admin-option input[type="radio"]:checked + .admin-label {
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            color: #000;
+        .radio-item input[type="radio"]:checked + label .admin-card {
             border-color: var(--gold);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            transform: scale(1.05);
-            animation: radioSelected 0.5s ease-out;
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
         }
 
-        @keyframes radioSelected {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1.05);
-            }
+        .light-mode .admin-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(124, 107, 0, 0.3);
         }
 
-        /* Enhanced Submit Button Animation */
+        .whatsapp-icon {
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 8px rgba(37, 211, 102, 0.3));
+        }
+
+        .admin-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .admin-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+        }
+
+        .admin-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            color: var(--text-dark);
+        }
+
+        .light-mode .admin-desc {
+            color: var(--text-light);
+        }
+
+        /* Submit Button */
         .submit-btn {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            color: #121212;
             border: none;
             border-radius: 12px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            color: #000;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             margin-top: 20px;
-            opacity: 0.5;
-            pointer-events: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.6s ease-out forwards;
-            animation-delay: 0.8s;
         }
 
         .submit-btn::before {
@@ -702,617 +415,332 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
+            transition: left 0.5s ease;
         }
 
-        .submit-btn.active {
-            opacity: 1;
-            pointer-events: auto;
-            animation: buttonActivate 0.5s ease-out;
-        }
-
-        @keyframes buttonActivate {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 rgba(255, 215, 0, 0);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-            }
-        }
-
-        .submit-btn.active:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
-            background: linear-gradient(135deg, #FFE55C, #F4D03F);
-        }
-
-        .submit-btn.active:hover::before {
+        .submit-btn:hover::before {
             left: 100%;
         }
 
-        .submit-btn:active {
-            transform: translateY(-2px) scale(0.98);
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
         }
 
-        /* Enhanced Theme Toggle Animation */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-            animation: themeToggleFloat 3s ease-in-out infinite;
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
-        @keyframes themeToggleFloat {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-5px) rotate(5deg);
-            }
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.2) rotate(15deg);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
-        }
-
-        /* Enhanced Checkbox Animation */
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 20px 0;
-            animation: fadeInUp 0.6s ease-out forwards;
-            animation-delay: 0.7s;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--gold);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .checkbox-group input[type="checkbox"]:checked {
-            animation: checkboxBounce 0.3s ease-out;
-        }
-
-        @keyframes checkboxBounce {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .checkbox-group:hover {
-            transform: translateX(5px);
-        }
-
-        /* Enhanced Note Animation */
-        .note {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
+        /* Footer */
+        .footer {
             text-align: center;
-            color: var(--gold-soft);
-            font-weight: 500;
-            animation: fadeInUp 0.6s ease-out forwards, notePulse 2s ease-in-out infinite;
-            animation-delay: 0.65s, 2s;
-            opacity: 0;
-            position: relative;
-            overflow: hidden;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--gold);
+            opacity: 0.8;
         }
 
-        @keyframes notePulse {
-            0%, 100% {
-                box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
             }
-            50% {
-                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-            }
-        }
 
-        /* Title Animation Enhancement */
-        .title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-            animation: titleGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            0% {
-                text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-                transform: scale(1);
+            .header h1 {
+                font-size: 2.2rem;
             }
-            100% {
-                text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.3);
-                transform: scale(1.02);
+
+            .form-container {
+                padding: 25px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .radio-item {
+                min-width: auto;
+            }
+
+            .admin-card {
+                padding: 15px;
+                gap: 12px;
+            }
+
+            .admin-title {
+                font-size: 1rem;
+            }
+
+            .admin-desc {
+                font-size: 0.8rem;
+            }
+
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .theme-toggle svg {
+                width: 25px;
+                height: 25px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="snow-container" id="snowContainer"></div>
+    <!-- Snow Animation -->
+    <div class="snow" id="snow"></div>
     
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-    
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Menghubungkan ke WhatsApp...</div>
-        </div>
-    </div>
+    <!-- Crystal Frame -->
+    <div class="crystal-frame"></div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <svg id="moonIcon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" style="display: none;">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+    </button>
 
     <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>SECRET AREA</h1>
+            <p>Elite Registration Portal</p>
+        </div>
+
+        <!-- Form Container -->
         <div class="form-container">
-            <h1 class="title">SECRET AREA</h1>
-            <p class="subtitle">Form Pendaftaran Eksklusif</p>
-            
             <form id="registrationForm">
                 <div class="form-group">
                     <label for="fullName">Nama Lengkap *</label>
-                    <input type="text" id="fullName" class="form-control" required>
+                    <input type="text" id="fullName" name="fullName" required>
                     <div class="error-message" id="fullNameError">Nama lengkap wajib diisi</div>
                 </div>
 
                 <div class="form-group">
                     <label for="gameId">ID Game *</label>
-                    <input type="text" id="gameId" class="form-control" required>
+                    <input type="text" id="gameId" name="gameId" required>
                     <div class="error-message" id="gameIdError">ID Game wajib diisi</div>
                 </div>
 
-                  <div class="form-group">
-                    <label for="gameId">Nickname *</label>
-                    <input type="text" id="Nickname " class="form-control" required>
-                    <div class="error-message" id="gameIdError">Nickname wajib diisi</div>
+                <div class="form-group">
+                    <label for="nickname">Nickname *</label>
+                    <input type="text" id="nickname" name="nickname" required>
+                    <div class="error-message" id="nicknameError">Nickname wajib diisi</div>
                 </div>
 
                 <div class="form-group">
-                    
-                    <label for="domicile">Domisili *</label>
-                    
-                    <input type="text" id="domicile" class="form-control" required>
-                    <div class="error-message" id="domicileError">Domisili wajib diisi
-                        
-                    </div>
+                    <label for="domisili">Domisili *</label>
+                    <input type="text" id="domisili" name="domisili" required>
+                    <div class="error-message" id="domisiliError">Domisili wajib diisi</div>
                 </div>
 
                 <div class="form-group">
                     <label for="age">Usia *</label>
-                    <input type="number" id="age" class="form-control" min="18" max="100" required>
-                    <div class="error-message" id="ageError">Usia harus antara 13-100 tahun</div>
+                    <input type="number" id="age" name="age" min="1" max="100" required>
+                    <div class="error-message" id="ageError">Usia harus diisi dengan angka yang valid</div>
                 </div>
-
-                <div class="form-group">
-    <label for="gender">Jenis Kelamin *</label>
-    <select id="gender" class="form-control" required>
-        <option value="">-- Pilih Jenis Kelamin --</option>
-        <option value="Laki-laki">Laki-laki</option>
-        <option value="Perempuan">Perempuan</option>
-    </select>
-    <div class="error-message" id="genderError">Jenis kelamin wajib dipilih</div>
-</div>
-
 
                 <div class="form-group">
                     <label for="tiktokLink">Link TikTok *</label>
-                    <input type="url" id="tiktokLink" class="form-control" placeholder="https://www.tiktok.com/@username" required>
-                    <div class="error-message" id="tiktokError">Link TikTok harus valid</div>
+                    <input type="url" id="tiktokLink" name="tiktokLink" placeholder="https://www.tiktok.com/@username" required>
+                    <div class="error-message" id="tiktokError">Link TikTok harus berupa URL yang valid</div>
+                </div>
+
+                <div class="note">
+                    ⚡ Wajib mengikuti semua Social Media SECRET AREA ⚡
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="agreement" name="agreement" required>
+                    <label for="agreement">Saya sudah mengikuti semua ketentuan pendaftaran</label>
                 </div>
 
                 <div class="admin-selection">
-                    <label>Pilih Admin WhatsApp *</label>
-                    <div class="admin-options">
-                        <div class="admin-option">
-                            <input type="radio" id="admin1" name="admin" value="+6287732771561" required>
-                            <label for="admin1" class="admin-label">Admin 1</label>
+                    <h3>📞 Pilih Admin untuk Kontak WhatsApp:</h3>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="admin1" name="admin" value="admin1" required>
+                            <label for="admin1">
+                                <div class="admin-card">
+                                    <svg class="whatsapp-icon" viewBox="0 0 24 24" width="24" height="24">
+                                        <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                                    </svg>
+                                    <div class="admin-info">
+                                        <span class="admin-title">Admin Premium 1</span>
+                                        <span class="admin-desc">Support 24/7 • Fast Response</span>
+                                    </div>
+                                </div>
+                            </label>
                         </div>
-                        <div class="admin-option">
-                            <input type="radio" id="admin2" name="admin" value="+6285272535526" required>
-                            <label for="admin2" class="admin-label">Admin 2</label>
+                        <div class="radio-item">
+                            <input type="radio" id="admin2" name="admin" value="admin2" required>
+                            <label for="admin2">
+                                <div class="admin-card">
+                                    <svg class="whatsapp-icon" viewBox="0 0 24 24" width="24" height="24">
+                                        <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                                    </svg>
+                                    <div class="admin-info">
+                                        <span class="admin-title">Admin Premium 2</span>
+                                        <span class="admin-desc">Support 24/7 • Fast Response</span>
+                                    </div>
+                                </div>
+                            </label>
                         </div>
                     </div>
                 </div>
 
-                <div class="note">
-                    ⭐ Wajib mengikuti semua Social Media SECRET AREA
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="agreement" required>
-                    <label for="agreement">Saya sudah mengikuti semua ketentuan pendaftaran</label>
-                </div>
-
-                <button type="submit" class="submit-btn" id="submitBtn">
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>
                     Daftar Sekarang
                 </button>
             </form>
         </div>
-        
+
+        <!-- Footer -->
         <div class="footer">
-            © SECRET AREA
+            © SECRET AREA - All rights reserved
         </div>
     </div>
 
     <script>
-        // Enhanced particle effects
-        function createParticles(element) {
-            for (let i = 0; i < 8; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                const size = Math.random() * 6 + 4;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                
-                const rect = element.getBoundingClientRect();
-                particle.style.left = (rect.left + Math.random() * rect.width) + 'px';
-                particle.style.top = (rect.top + rect.height / 2) + 'px';
-                
-                document.body.appendChild(particle);
-                
-                setTimeout(() => {
-                    if (document.body.contains(particle)) {
-                        document.body.removeChild(particle);
-                    }
-                }, 2000);
-            }
-        }
-
-        // Mouse trail effect
-        let mouseTrail = [];
-        document.addEventListener('mousemove', function(e) {
-            if (mouseTrail.length > 10) {
-                const oldTrail = mouseTrail.shift();
-                if (document.body.contains(oldTrail)) {
-                    document.body.removeChild(oldTrail);
-                }
-            }
+        // Snow Animation
+        function createSnow() {
+            const snowContainer = document.getElementById('snow');
+            const snowflakes = ['❄', '❅', '❆', '✦', '✧', '✩'];
             
-            const trail = document.createElement('div');
-            trail.className = 'golden-trail';
-            trail.style.left = e.clientX + 'px';
-            trail.style.top = e.clientY + 'px';
-            
-            document.body.appendChild(trail);
-            mouseTrail.push(trail);
-            
-            setTimeout(() => {
-                if (document.body.contains(trail)) {
-                    document.body.removeChild(trail);
-                }
-            }, 500);
-        });
-
-        // Snow and Crystal Animation
-        function createSnowflake() {
-            const snowContainer = document.getElementById('snowContainer');
-            const snowflake = document.createElement('div');
-            
-            // Randomly choose between snow and crystal
-            const isSnow = Math.random() > 0.3;
-            
-            if (isSnow) {
+            setInterval(() => {
+                const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
-                snowflake.innerHTML = ['❄', '❅', '❆', '✻', '✼', '❉'][Math.floor(Math.random() * 6)];
-            } else {
-                snowflake.className = 'crystal';
-                snowflake.innerHTML = ['◊', '◈', '♦', '⬙', '⬠', '⟐'][Math.floor(Math.random() * 6)];
-            }
-            
-            // Random size
-            const size = Math.random() * 15 + 10;
-            snowflake.style.fontSize = size + 'px';
-            
-            // Random horizontal position
-            snowflake.style.left = Math.random() * 100 + '%';
-            
-            // Random animation duration
-            const duration = Math.random() * 8 + 5;
-            snowflake.style.animationDuration = duration + 's';
-            
-            // Random delay
-            snowflake.style.animationDelay = Math.random() * 2 + 's';
-            
-            snowContainer.appendChild(snowflake);
-            
-            // Remove snowflake after animation
-            setTimeout(() => {
-                if (snowContainer.contains(snowflake)) {
-                    snowContainer.removeChild(snowflake);
-                }
-            }, (duration + 2) * 1000);
-        }
+                snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                snowContainer.appendChild(snowflake);
 
-        // Create snowflakes continuously
-        function startSnowfall() {
-            setInterval(createSnowflake, 200);
-        }
-
-        // Start snowfall when page loads
-        document.addEventListener('DOMContentLoaded', startSnowfall);
-
-        // Theme toggle functionality
-        function toggleTheme() {
-            const body = document.body;
-            const toggleBtn = document.querySelector('.theme-toggle');
-            
-            // Add rotation animation
-            toggleBtn.style.transform = 'scale(1.2) rotate(360deg)';
-            
-            setTimeout(() => {
-                body.classList.toggle('light-mode');
-                
-                if (body.classList.contains('light-mode')) {
-                    toggleBtn.innerHTML = '☀️';
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    toggleBtn.innerHTML = '🌙';
-                    localStorage.setItem('theme', 'dark');
-                }
-                
-                // Reset transform
                 setTimeout(() => {
-                    toggleBtn.style.transform = '';
-                }, 100);
-            }, 200);
+                    snowflake.remove();
+                }, 5000);
+            }, 300);
         }
 
-        // Load saved theme
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
-                document.querySelector('.theme-toggle').innerHTML = '☀️';
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
+            } else {
+                moonIcon.style.display = 'block';
+                sunIcon.style.display = 'none';
             }
         });
 
-        // Enhanced form validation with animations
+        // Form Validation
+        const form = document.getElementById('registrationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const inputs = form.querySelectorAll('input[required]');
+
         function validateForm() {
-            const form = document.getElementById('registrationForm');
-            const submitBtn = document.getElementById('submitBtn');
             let isValid = true;
-
-            // Get all required fields
-            const fullName = document.getElementById('fullName');
-            const gameId = document.getElementById('gameId');
-            const domicile = document.getElementById('domicile');
-            const age = document.getElementById('age');
-            const tiktokLink = document.getElementById('tiktokLink');
-            const admin = document.querySelector('input[name="admin"]:checked');
-            const agreement = document.getElementById('agreement');
-
-            // Validate each field with enhanced animations
-            if (!fullName.value.trim()) {
-                showError('fullNameError');
-                addErrorShake(fullName);
-                isValid = false;
-            } else {
-                hideError('fullNameError');
-                addSuccessGlow(fullName);
-            }
-
-            if (!gameId.value.trim()) {
-                showError('gameIdError');
-                addErrorShake(gameId);
-                isValid = false;
-            } else {
-                hideError('gameIdError');
-                addSuccessGlow(gameId);
-            }
-
-            if (!domicile.value.trim()) {
-                showError('domicileError');
-                addErrorShake(domicile);
-                isValid = false;
-            } else {
-                hideError('domicileError');
-                addSuccessGlow(domicile);
-            }
-
-            if (!age.value || age.value < 13 || age.value > 100) {
-                showError('ageError');
-                addErrorShake(age);
-                isValid = false;
-            } else {
-                hideError('ageError');
-                addSuccessGlow(age);
-            }
-
-            if (!tiktokLink.value || !isValidUrl(tiktokLink.value)) {
-                showError('tiktokError');
-                addErrorShake(tiktokLink);
-                isValid = false;
-            } else {
-                hideError('tiktokError');
-                addSuccessGlow(tiktokLink);
-            }
-
-            // Check if admin is selected and agreement is checked
-            if (admin && agreement.checked && isValid) {
-                submitBtn.classList.add('active');
-            } else {
-                submitBtn.classList.remove('active');
-            }
-        }
-
-        function addErrorShake(element) {
-            element.style.animation = 'shake 0.5s ease-in-out';
-            element.style.borderColor = '#ff4757';
-            setTimeout(() => {
-                element.style.animation = '';
-            }, 500);
-        }
-
-        function addSuccessGlow(element) {
-            element.style.borderColor = 'var(--gold)';
-            element.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.3)';
-        }
-
-        // Add shake animation CSS
-        const shakeCSS = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
-            }
-        `;
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = shakeCSS;
-        document.head.appendChild(styleSheet);
-
-        function showError(errorId) {
-            const errorElement = document.getElementById(errorId);
-            errorElement.style.display = 'block';
-            errorElement.style.animation = 'fadeInUp 0.3s ease-out';
-        }
-
-        function hideError(errorId) {
-            document.getElementById(errorId).style.display = 'none';
-        }
-
-        function isValidUrl(string) {
-            try {
-                new URL(string);
-                return true;
-            } catch (_) {
-                return false;
-            }
-        }
-
-        // Enhanced event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('registrationForm');
-            const inputs = form.querySelectorAll('input');
             
             inputs.forEach(input => {
-                input.addEventListener('input', validateForm);
-                input.addEventListener('change', validateForm);
+                const errorElement = document.getElementById(input.id + 'Error');
                 
-                // Add focus animations
-                input.addEventListener('focus', function() {
-                    this.parentElement.classList.add('focused');
-                    createParticles(this);
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.classList.remove('focused');
-                });
-            });
-
-            // Add admin selection animations
-            const adminLabels = document.querySelectorAll('.admin-label');
-            adminLabels.forEach(label => {
-                label.addEventListener('click', function() {
-                    createParticles(this);
-                });
-            });
-
-            // Add checkbox animation
-            const checkbox = document.getElementById('agreement');
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    createParticles(this);
-                    this.parentElement.style.animation = 'checkboxBounce 0.3s ease-out';
+                if (input.type === 'email' && input.value && !input.value.includes('@')) {
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else if (input.type === 'url' && input.value && !input.value.startsWith('http')) {
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else if (input.type === 'number' && input.value && (input.value < 1 || input.value > 100)) {
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else if (!input.value.trim()) {
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else {
+                    errorElement.style.display = 'none';
                 }
             });
 
-            // Enhanced form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const submitBtn = document.getElementById('submitBtn');
-                if (!submitBtn.classList.contains('active')) {
-                    return;
-                }
+            const agreement = document.getElementById('agreement');
+            const adminSelected = document.querySelector('input[name="admin"]:checked');
+            
+            if (!agreement.checked || !adminSelected) {
+                isValid = false;
+            }
 
-                // Enhanced loading animation
-                const formContainer = document.querySelector('.form-container');
-                formContainer.classList.add('form-success');
-                document.getElementById('loadingOverlay').style.display = 'flex';
-                submitBtn.innerHTML = 'Mengirim...';
-                submitBtn.style.transform = 'scale(0.95)';
-                createParticles(submitBtn);
+            submitBtn.disabled = !isValid;
+        }
 
-                // Get form data
-                const formData = {
-                    fullName: document.getElementById('fullName').value,
-                    gameId: document.getElementById('gameId').value,
-                    domicile: document.getElementById('domicile').value,
-                    age: document.getElementById('age').value,
-                    tiktokLink: document.getElementById('tiktokLink').value,
-                    admin: document.querySelector('input[name="admin"]:checked').value
-                };
+        inputs.forEach(input => {
+            input.addEventListener('input', validateForm);
+            input.addEventListener('blur', validateForm);
+        });
 
-                // Create WhatsApp message
-                const message = `Halo Admin, saya ingin mendaftar SECRET AREA dengan data berikut:
+        document.getElementById('agreement').addEventListener('change', validateForm);
+        document.querySelectorAll('input[name="admin"]').forEach(radio => {
+            radio.addEventListener('change', validateForm);
+        });
 
-Nama Lengkap: ${formData.fullName}
-ID Game: ${formData.gameId}
-Nickname: ${formData.nickname}
-Domisili: ${formData.domicile}
+        // Form Submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
 
-Usia: ${formData.age}
-Jenis Kelamin: ${formData.Jenis}
-Link TikTok: ${formData.tiktokLink}
+            const adminNumbers = {
+                admin1: '6287732771561',
+                admin2: '6285272535526'
+            };
+
+            const selectedAdmin = adminNumbers[data.admin];
+            
+            const message = `Halo Admin, saya ingin mendaftar SECRET AREA dengan data berikut:
+
+Nama Lengkap: ${data.fullName}
+ID Game: ${data.gameId}
+Nickname: ${data.nickname}
+Domisili: ${data.domisili}
+Usia: ${data.age}
+Link TikTok: ${data.tiktokLink}
 
 Terima kasih!`;
 
-                // Create WhatsApp URL
-                const whatsappUrl = `https://wa.me/${formData.admin}?text=${encodeURIComponent(message)}`;
-
-                // Redirect with enhanced animation
-                setTimeout(() => {
-                    document.getElementById('loadingOverlay').style.display = 'none';
-                    submitBtn.innerHTML = 'Berhasil! 🎉';
-                    submitBtn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
-                    
-                    setTimeout(() => {
-                        window.open(whatsappUrl, '_blank');
-                        
-                        // Reset button after redirect
-                        setTimeout(() => {
-                            submitBtn.innerHTML = 'Daftar Sekarang';
-                            submitBtn.style.background = 'linear-gradient(135deg, var(--gold), var(--gold-soft))';
-                            submitBtn.style.transform = '';
-                        }, 2000);
-                    }, 1000);
-                }, 1500);
-            });
+            const whatsappUrl = `https://wa.me/${selectedAdmin}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         });
+
+        // Initialize
+        createSnow();
+        validateForm();
     </script>
 </body>
 </html>
