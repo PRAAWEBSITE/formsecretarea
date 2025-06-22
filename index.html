@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SECRET AREA - Registration</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&family=Audiowide:wght@400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,53 +13,176 @@
         }
 
         :root {
-            --bg-dark: #121212;
-            --bg-light: #FFF9E3;
-            --text-dark: #E0C15A;
-            --text-light: #7C6B00;
-            --gold: #FFD700;
-            --gold-soft: #E6C15A;
-            --crystal: rgba(255, 255, 255, 0.1);
+            --primary-bg: #1e1e1e;
+            --secondary-bg: #2a2a2a;
+            --accent-gold: #ffd700;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --input-bg: #333333;
+            --border-color: #444444;
+            --glow-gold: rgba(255, 215, 0, 0.6);
+        }
+
+        .light-theme {
+            --primary-bg: #f5f5f5;
+            --secondary-bg: #ffffff;
+            --accent-gold: #ff6b35;
+            --text-primary: #1e1e1e;
+            --text-secondary: #555555;
+            --input-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --glow-gold: rgba(255, 107, 53, 0.6);
         }
 
         body {
-            font-family: 'Orbitron', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-dark);
+            font-family: 'Exo 2', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
 
-        body.light-mode {
-            background: var(--bg-light);
-            color: var(--text-light);
-        }
-
-        /* Snow Animation */
-        .snow {
+        /* Enhanced Golden Light Animation */
+        .golden-light-overlay {
             position: fixed;
-            top: -100px;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             pointer-events: none;
             z-index: 1;
+            overflow: hidden;
         }
 
-        .snowflake {
+        .golden-beam {
             position: absolute;
-            color: var(--gold);
-            font-size: 1em;
-            animation: fall linear infinite;
+            top: 0;
+            left: -200px;
+            width: 150px;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 215, 0, 0.1) 20%, 
+                rgba(255, 215, 0, 0.3) 50%, 
+                rgba(255, 215, 0, 0.1) 80%, 
+                transparent 100%);
+            animation: goldenSweep 6s linear infinite;
+            transform: skewX(-20deg);
+        }
+
+        .golden-beam:nth-child(2) {
+            animation-delay: 2s;
+            width: 100px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 215, 0, 0.05) 20%, 
+                rgba(255, 215, 0, 0.2) 50%, 
+                rgba(255, 215, 0, 0.05) 80%, 
+                transparent 100%);
+        }
+
+        .golden-beam:nth-child(3) {
+            animation-delay: 4s;
+            width: 80px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 215, 0, 0.08) 20%, 
+                rgba(255, 215, 0, 0.25) 50%, 
+                rgba(255, 215, 0, 0.08) 80%, 
+                transparent 100%);
+        }
+
+        @keyframes goldenSweep {
+            0% {
+                left: -200px;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                left: calc(100% + 200px);
+                opacity: 0;
+            }
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .light-ray {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            animation: lightMove 10s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes lightMove {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Enhanced Falling Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-gold);
             opacity: 0.8;
+            animation: fall linear infinite;
+            border-radius: 50%;
+        }
+
+        .particle.gamepad {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background: linear-gradient(45deg, var(--accent-gold), #ffed4e);
+            box-shadow: 0 0 8px var(--glow-gold);
+        }
+
+        .particle.crystal {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            background: linear-gradient(45deg, var(--accent-gold), #fff);
+            box-shadow: 0 0 10px var(--glow-gold);
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.8;
+            }
+            95% {
+                opacity: 0.8;
             }
             100% {
                 transform: translateY(100vh) rotate(360deg);
@@ -67,116 +190,106 @@
             }
         }
 
-        /* Crystal Frame */
-        .crystal-frame {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .crystal-frame::before,
-        .crystal-frame::after {
-            content: '';
-            position: absolute;
-            background: linear-gradient(45deg, transparent 30%, var(--crystal) 50%, transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        .crystal-frame::before {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        .crystal-frame::after {
-            top: 0;
-            right: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(0deg, transparent, var(--gold), transparent);
-        }
-
-        @keyframes shimmer {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        /* Toggle Button */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(255, 215, 0, 0.5);
-        }
-
-        .theme-toggle svg {
-            width: 30px;
-            height: 30px;
-            fill: #121212;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 50px 20px;
             position: relative;
             z-index: 10;
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .header h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            margin-bottom: 10px;
+        .logo {
+            font-family: 'Audiowide', cursive;
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--accent-gold);
+            text-shadow: 
+                0 0 10px var(--accent-gold),
+                0 0 20px var(--accent-gold),
+                0 0 30px var(--accent-gold);
+            margin-bottom: 15px;
+            animation: logoGlow 3s ease-in-out infinite alternate;
             letter-spacing: 3px;
         }
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            letter-spacing: 1px;
+        .subtitle {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        @keyframes logoGlow {
+            from { 
+                text-shadow: 
+                    0 0 10px var(--accent-gold),
+                    0 0 20px var(--accent-gold),
+                    0 0 30px var(--accent-gold);
+            }
+            to { 
+                text-shadow: 
+                    0 0 15px var(--accent-gold),
+                    0 0 25px var(--accent-gold),
+                    0 0 35px var(--accent-gold),
+                    0 0 45px var(--accent-gold);
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: var(--secondary-bg);
+            border: 2px solid var(--accent-gold);
+            border-radius: 50px;
+            padding: 12px 25px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 25px var(--glow-gold);
+        }
+
+        .theme-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover .theme-icon {
+            transform: rotate(20deg);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 25px;
+            position: relative;
+            z-index: 10;
         }
 
         /* Form Container */
         .form-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            background: var(--secondary-bg);
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 50px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
@@ -184,247 +297,166 @@
         .form-container::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--gold), transparent, var(--gold-soft), transparent);
-            border-radius: 22px;
-            z-index: -1;
-            opacity: 0.3;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--accent-gold) 50%, 
+                transparent 100%);
+            animation: topGlow 4s ease-in-out infinite;
         }
 
-        .light-mode .form-container {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(124, 107, 0, 0.2);
+        @keyframes topGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
-        /* Form Groups */
+        .form-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             position: relative;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'Orbitron', monospace;
             font-size: 0.9rem;
             letter-spacing: 0.5px;
         }
 
-        .form-group input,
-        .form-group select {
+        .form-input {
             width: 100%;
-            padding: 15px 20px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            padding: 18px 20px;
+            background: var(--input-bg);
+            border: 2px solid var(--border-color);
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-dark);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Exo 2', sans-serif;
         }
 
-        .light-mode .form-group input,
-        .light-mode .form-group select {
-            background: rgba(255, 255, 255, 0.8);
-            color: var(--text-light);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
+        .form-input:focus {
             outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-            transform: translateY(-2px);
+            border-color: var(--accent-gold);
+            box-shadow: 
+                0 0 20px var(--glow-gold),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+            background: var(--input-bg);
         }
 
-        .form-group input:hover,
-        .form-group select:hover {
-            border-color: var(--gold-soft);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        .form-input:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            transform: translateY(-1px);
         }
 
-        /* Error Messages */
-        .error-message {
-            color: #ff6b6b;
-            font-size: 0.8rem;
-            margin-top: 5px;
-            display: none;
+        /* Typing Animation Effect */
+        .form-input:focus {
+            animation: inputFocus 0.6s ease-out;
         }
 
-        /* Note */
-        .note {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            font-weight: 600;
-            color: var(--gold);
+        @keyframes inputFocus {
+            0% {
+                box-shadow: 0 0 0 var(--glow-gold);
+            }
+            50% {
+                box-shadow: 0 0 30px var(--glow-gold);
+            }
+            100% {
+                box-shadow: 0 0 20px var(--glow-gold);
+            }
         }
 
-        /* Checkbox */
-        .checkbox-container {
-            display: flex;
-            align-items: center;
-            margin: 25px 0;
-            cursor: pointer;
+        .province-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
-        .checkbox-container input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 15px;
-            accent-color: var(--gold);
-        }
-
-        /* Admin Selection */
-        .admin-selection {
-            margin: 25px 0;
-        }
-
-        .admin-selection h3 {
-            margin-bottom: 20px;
-            color: var(--gold);
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .radio-item {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .radio-item input[type="radio"] {
-            display: none;
-        }
-
-        .radio-item label {
-            display: block;
-            cursor: pointer;
-        }
-
-        .admin-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 215, 0, 0.3);
+        .note-box {
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.1) 0%, 
+                rgba(255, 215, 0, 0.05) 100%);
+            border: 2px solid var(--accent-gold);
             border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            padding: 25px;
+            margin: 35px 0;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .admin-card::before {
+        .note-box::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                transparent 100%);
+            animation: noteShine 3s ease-in-out infinite;
         }
 
-        .admin-card:hover::before {
-            left: 100%;
+        @keyframes noteShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
-        .admin-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .radio-item input[type="radio"]:checked + label .admin-card {
-            border-color: var(--gold);
-            background: rgba(255, 215, 0, 0.1);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-        }
-
-        .light-mode .admin-card {
-            background: rgba(255, 255, 255, 0.8);
-            border-color: rgba(124, 107, 0, 0.3);
-        }
-
-        .whatsapp-icon {
-            flex-shrink: 0;
-            filter: drop-shadow(0 2px 8px rgba(37, 211, 102, 0.3));
-        }
-
-        .admin-info {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .admin-title {
-            font-weight: 700;
+        .note-box strong {
+            color: var(--accent-gold);
+            font-family: 'Orbitron', monospace;
             font-size: 1.1rem;
-            color: var(--gold);
-            letter-spacing: 0.5px;
         }
 
-        .admin-desc {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            color: var(--text-dark);
-        }
-
-        .light-mode .admin-desc {
-            color: var(--text-light);
-        }
-
-        /* Submit Button */
+        /* Enhanced Submit Button */
         .submit-btn {
             width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            color: #121212;
+            padding: 20px;
+            background: linear-gradient(135deg, 
+                var(--accent-gold) 0%, 
+                #ffed4e  50%, 
+                var(--accent-gold) 100%);
+            color: #1a1a1a;
             border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            border-radius: 15px;
+            font-size: 18px;
             font-weight: 700;
+            font-family: 'Orbitron', monospace;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
         }
 
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .submit-btn:hover::before {
-            left: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, 
+                #ffed4e 0%, 
+                var(--accent-gold) 50%, 
+                #ffed4e 100%);
         }
 
         .submit-btn:disabled {
@@ -434,313 +466,384 @@
             box-shadow: none;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: var(--gold);
-            opacity: 0.8;
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.4) 50%, 
+                transparent 100%);
+            transition: left 0.8s ease;
         }
 
-        /* Responsive */
+        .submit-btn:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px 15px;
+            .logo {
+                font-size: 2.5rem;
             }
 
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .form-container {
-                padding: 25px;
-            }
-
-            .radio-group {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .radio-item {
-                min-width: auto;
-            }
-
-            .admin-card {
-                padding: 15px;
-                gap: 12px;
-            }
-
-            .admin-title {
+            .subtitle {
                 font-size: 1rem;
             }
 
-            .admin-desc {
-                font-size: 0.8rem;
+            .form-container {
+                padding: 30px 25px;
+                margin: 0 15px 40px;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
             }
 
             .theme-toggle {
-                width: 50px;
-                height: 50px;
                 top: 15px;
                 right: 15px;
+                padding: 10px 20px;
             }
 
-            .theme-toggle svg {
-                width: 25px;
-                height: 25px;
+            .container {
+                padding: 0 15px;
             }
+        }
+
+        /* Validation Styles */
+        .form-input.error {
+            border-color: #ff4444;
+            box-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 8px;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            font-size: 12px;
+            margin-top: 8px;
+            font-family: 'Exo 2', sans-serif;
         }
     </style>
 </head>
 <body>
-    <!-- Snow Animation -->
-    <div class="snow" id="snow"></div>
-    
-    <!-- Crystal Frame -->
-    <div class="crystal-frame"></div>
+    <!-- Enhanced Golden Light Animation -->
+    <div class="golden-light-overlay">
+        <div class="golden-beam"></div>
+        <div class="golden-beam"></div>
+        <div class="golden-beam"></div>
+    </div>
+
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="light-ray" style="top: 15%; animation-delay: 0s; animation-duration: 12s;"></div>
+        <div class="light-ray" style="top: 35%; animation-delay: 3s; animation-duration: 15s;"></div>
+        <div class="light-ray" style="top: 55%; animation-delay: 6s; animation-duration: 10s;"></div>
+        <div class="light-ray" style="top: 75%; animation-delay: 9s; animation-duration: 14s;"></div>
+    </div>
+
+    <!-- Enhanced Falling Particles -->
+    <div class="particles" id="particles"></div>
 
     <!-- Theme Toggle -->
-    <button class="theme-toggle" id="themeToggle">
-        <svg id="moonIcon" viewBox="0 0 24 24">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-        <svg id="sunIcon" viewBox="0 0 24 24" style="display: none;">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/>
-            <line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/>
-            <line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-    </button>
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+        <span id="themeText">Dark</span>
+    </div>
 
+    <!-- Header -->
+    <div class="header">
+        <h1 class="logo">SECRET AREA</h1>
+        <p class="subtitle">JOIN THE ELITE GAMING COMMUNITY</p>
+    </div>
+
+    <!-- Main Container -->
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>SECRET AREA</h1>
-            <p>Elite Registration Portal</p>
-        </div>
-
-        <!-- Form Container -->
         <div class="form-container">
+            <h2 class="form-title">REGISTRATION FORM</h2>
             <form id="registrationForm">
                 <div class="form-group">
-                    <label for="fullName">Nama Lengkap *</label>
-                    <input type="text" id="fullName" name="fullName" required>
-                    <div class="error-message" id="fullNameError">Nama lengkap wajib diisi</div>
+                    <label class="form-label">NAMA LENGKAP *</label>
+                    <input type="text" class="form-input" id="namaLengkap" required placeholder="Masukkan nama lengkap Anda">
+                    <div class="error-message" id="namaLengkapError"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="gameId">ID Game *</label>
-                    <input type="text" id="gameId" name="gameId" required>
-                    <div class="error-message" id="gameIdError">ID Game wajib diisi</div>
+                    <label class="form-label">NICKNAME (IN-GAME NAME) *</label>
+                    <input type="text" class="form-input" id="nickname" required placeholder="Masukkan nickname gaming Anda">
+                    <div class="error-message" id="nicknameError"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="nickname">Nickname *</label>
-                    <input type="text" id="nickname" name="nickname" required>
-                    <div class="error-message" id="nicknameError">Nickname wajib diisi</div>
+                    <label class="form-label">ID GAME (PUBG, FREE FIRE, ML, DLL) *</label>
+                    <input type="text" class="form-input" id="idGame" required placeholder="Masukkan ID game utama Anda">
+                    <div class="error-message" id="idGameError"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="domisili">Domisili *</label>
-                    <input type="text" id="domisili" name="domisili" required>
-                    <div class="error-message" id="domisiliError">Domisili wajib diisi</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="age">Usia *</label>
-                    <input type="number" id="age" name="age" min="1" max="100" required>
-                    <div class="error-message" id="ageError">Usia harus diisi dengan angka yang valid</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="tiktokLink">Link TikTok *</label>
-                    <input type="url" id="tiktokLink" name="tiktokLink" placeholder="https://www.tiktok.com/@username" required>
-                    <div class="error-message" id="tiktokError">Link TikTok harus berupa URL yang valid</div>
-                </div>
-
-                <div class="note">
-                    ⚡ Wajib mengikuti semua Social Media SECRET AREA ⚡
-                </div>
-
-                <div class="checkbox-container">
-                    <input type="checkbox" id="agreement" name="agreement" required>
-                    <label for="agreement">Saya sudah mengikuti semua ketentuan pendaftaran</label>
-                </div>
-
-                <div class="admin-selection">
-                    <h3>📞 Pilih Admin untuk Kontak WhatsApp:</h3>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="admin1" name="admin" value="admin1" required>
-                            <label for="admin1">
-                                <div class="admin-card">
-                                    <svg class="whatsapp-icon" viewBox="0 0 24 24" width="24" height="24">
-                                        <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                                    </svg>
-                                    <div class="admin-info">
-                                        <span class="admin-title">Admin 1</span>
-                                        <span class="admin-desc">Support 24/7 • Fast Response</span>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="admin2" name="admin" value="admin2" required>
-                            <label for="admin2">
-                                <div class="admin-card">
-                                    <svg class="whatsapp-icon" viewBox="0 0 24 24" width="24" height="24">
-                                        <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                                    </svg>
-                                    <div class="admin-info">
-                                        <span class="admin-title">Admin 2</span>
-                                        <span class="admin-desc">Support 24/7 • Fast Response</span>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
+                    <label class="form-label">DOMISILI *</label>
+                    <div class="province-group">
+                        <select class="form-input" id="provinsi" required>
+                            <option value="">Pilih Provinsi</option>
+                        </select>
                     </div>
+                    <div class="error-message" id="domisiliError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">UMUR *</label>
+                    <input type="number" class="form-input" id="umur" min="13" max="50" required placeholder="Masukkan umur Anda">
+                    <div class="error-message" id="umurError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">LINK TIKTOK *</label>
+                    <input type="url" class="form-input" id="linkTiktok" required placeholder="https://tiktok.com/@username">
+                    <div class="error-message" id="linkTiktokError"></div>
+                </div>
+
+                <div class="note-box">
+                    <strong>📌 CATATAN PENTING</strong><br><br>
+                    Wajib mengikuti semua akun media sosial resmi SECRET AREA sebelum mendaftar.
                 </div>
 
                 <button type="submit" class="submit-btn" id="submitBtn" disabled>
-                    Daftar Sekarang
+                    DAFTAR SEKARANG
                 </button>
             </form>
         </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            ©2025 Copyright SECRET AREA - All rights reserved
-        </div>
     </div>
 
-    <script>
-        // Snow Animation
-        function createSnow() {
-            const snowContainer = document.getElementById('snow');
-            const snowflakes = ['❄', '❅', '❆', '✦', '✧', '✩'];
-            
-            setInterval(() => {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
-                snowflake.style.left = Math.random() * 100 + '%';
-                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-                snowContainer.appendChild(snowflake);
+    <!-- Footer -->
+    <footer>
+        ©2021-2025 Copyright  SECRET AREA. All rights reserved.
+    </footer>
 
-                setTimeout(() => {
-                    snowflake.remove();
-                }, 5000);
-            }, 300);
+    <script>
+        // Enhanced Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            body.classList.toggle('light-theme');
+            
+            if (body.classList.contains('light-theme')) {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'dark');
+            }
         }
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const moonIcon = document.getElementById('moonIcon');
-        const sunIcon = document.getElementById('sunIcon');
-        const body = document.body;
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            if (body.classList.contains('light-mode')) {
-                moonIcon.style.display = 'none';
-                sunIcon.style.display = 'block';
-            } else {
-                moonIcon.style.display = 'block';
-                sunIcon.style.display = 'none';
+        // Load Saved Theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                document.getElementById('themeIcon').textContent = '☀️';
+                document.getElementById('themeText').textContent = 'Light';
             }
-        });
+        }
 
-        // Form Validation
-        const form = document.getElementById('registrationForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const inputs = form.querySelectorAll('input[required]');
-
-        function validateForm() {
-            let isValid = true;
+        // Enhanced Particle System
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
             
-            inputs.forEach(input => {
-                const errorElement = document.getElementById(input.id + 'Error');
+            setInterval(() => {
+                if (particlesContainer.children.length < 20) {
+                    const particle = document.createElement('div');
+                    const isGamepad = Math.random() > 0.6;
+                    particle.className = `particle ${isGamepad ? 'gamepad' : 'crystal'}`;
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    
+                    particlesContainer.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.remove();
+                        }
+                    }, 7000);
+                }
+            }, 200);
+        }
+
+        // Complete Indonesian Provinces
+        const provinces = [
+            "Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", 
+            "Jambi", "Sumatera Selatan", "Kepulauan Bangka Belitung", "Bengkulu", "Lampung",
+            "DKI Jakarta", "Jawa Barat", "Jawa Tengah", "DI Yogyakarta", "Jawa Timur", "Banten",
+            "Bali", "Nusa Tenggara Barat", "Nusa Tenggara Timur",
+            "Kalimantan Barat", "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara",
+            "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Gorontalo", "Sulawesi Barat",
+            "Maluku", "Maluku Utara", "Papua", "Papua Barat", "Papua Selatan", "Papua Tengah", "Papua Pegunungan", "Papua Barat Daya"
+        ];
+
+        // Populate Provinces
+        function populateProvinsi() {
+            const provinsiSelect = document.getElementById('provinsi');
+            provinces.forEach(provinsi => {
+                const option = document.createElement('option');
+                option.value = provinsi;
+                option.textContent = provinsi;
+                provinsiSelect.appendChild(option);
+            });
+        }
+
+        // Enhanced Form Validation
+        function validateForm() {
+            const fields = ['namaLengkap', 'nickname', 'idGame', 'provinsi', 'umur', 'linkTiktok'];
+            let isValid = true;
+
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                const errorElement = document.getElementById(fieldId + 'Error') || document.getElementById('domisiliError');
                 
-                if (input.type === 'email' && input.value && !input.value.includes('@')) {
-                    errorElement.style.display = 'block';
-                    isValid = false;
-                } else if (input.type === 'url' && input.value && !input.value.startsWith('http')) {
-                    errorElement.style.display = 'block';
-                    isValid = false;
-                } else if (input.type === 'number' && input.value && (input.value < 1 || input.value > 100)) {
-                    errorElement.style.display = 'block';
-                    isValid = false;
-                } else if (!input.value.trim()) {
-                    errorElement.style.display = 'block';
+                field.classList.remove('error');
+                if (errorElement) errorElement.textContent = '';
+
+                if (!field.value.trim()) {
+                    field.classList.add('error');
+                    if (errorElement) errorElement.textContent = 'Field ini wajib diisi';
                     isValid = false;
                 } else {
-                    errorElement.style.display = 'none';
+                    // Specific validations
+                    if (fieldId === 'linkTiktok' && !field.value.includes('tiktok.com')) {
+                        field.classList.add('error');
+                        if (errorElement) errorElement.textContent = 'Link TikTok tidak valid';
+                        isValid = false;
+                    }
+                    
+                    if (fieldId === 'umur' && (field.value < 13 || field.value > 50)) {
+                        field.classList.add('error');
+                        const umurError = document.getElementById('umurError');
+                        if (umurError) umurError.textContent = 'Umur harus antara 13-50 tahun';
+                        isValid = false;
+                    }
+
+                    if (fieldId === 'namaLengkap' && field.value.length < 3) {
+                        field.classList.add('error');
+                        const namaError = document.getElementById('namaLengkapError');
+                        if (namaError) namaError.textContent = 'Nama lengkap minimal 3 karakter';
+                        isValid = false;
+                    }
                 }
             });
 
-            const agreement = document.getElementById('agreement');
-            const adminSelected = document.querySelector('input[name="admin"]:checked');
-            
-            if (!agreement.checked || !adminSelected) {
-                isValid = false;
-            }
-
-            submitBtn.disabled = !isValid;
+            document.getElementById('submitBtn').disabled = !isValid;
+            return isValid;
         }
 
-        inputs.forEach(input => {
-            input.addEventListener('input', validateForm);
-            input.addEventListener('blur', validateForm);
-        });
-
-        document.getElementById('agreement').addEventListener('change', validateForm);
-        document.querySelectorAll('input[name="admin"]').forEach(radio => {
-            radio.addEventListener('change', validateForm);
-        });
-
-        // Form Submission
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            const adminNumbers = {
-                admin1: '6287732771561',
-                admin2: '6285272535526'
+        // Enhanced WhatsApp Submission
+        function submitToWhatsApp() {
+            const formData = {
+                namaLengkap: document.getElementById('namaLengkap').value,
+                nickname: document.getElementById('nickname').value,
+                idGame: document.getElementById('idGame').value,
+                provinsi: document.getElementById('provinsi').value,
+                umur: document.getElementById('umur').value,
+                linkTiktok: document.getElementById('linkTiktok').value
             };
 
-            const selectedAdmin = adminNumbers[data.admin];
-            
-            const message = `Halo Admin, saya ingin mendaftar SECRET AREA dengan data berikut:
+            const message = `PENDAFTARAN SECRET AREA
 
-Nama Lengkap: ${data.fullName}
-ID Game: ${data.gameId}
-Nickname: ${data.nickname}
-Domisili: ${data.domisili}
-Usia: ${data.age}
-Link TikTok: ${data.tiktokLink}
+Halo Admin SECRET AREA, saya ingin mendaftar.
+
+ Nama Lengkap: ${formData.namaLengkap}
+ Nickname: ${formData.nickname}
+ ID Game: ${formData.idGame}
+ Domisili: ${formData.provinsi}
+ Umur: ${formData.umur}
+ Link TikTok: ${formData.linkTiktok}
+
+Saya sudah mengikuti semua sosial media SECRET AREA.
 
 Terima kasih!`;
 
+            // Random admin selection
+            const adminNumbers = ['6287732771561', '6285272535526'];
+            const selectedAdmin = adminNumbers[Math.floor(Math.random() * adminNumbers.length)];
+            
             const whatsappUrl = `https://wa.me/${selectedAdmin}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
-        });
+        }
 
-        // Initialize
-        createSnow();
-        validateForm();
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            createParticles();
+            populateProvinsi();
+
+            // Form validation on input
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.addEventListener('input', validateForm);
+                input.addEventListener('blur', validateForm);
+                
+                // Add focus animation
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Form submission
+            document.getElementById('registrationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (validateForm()) {
+                    // Add submission effect
+                    const submitBtn = document.getElementById('submitBtn');
+                    submitBtn.textContent = 'MENGIRIM...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        submitToWhatsApp();
+                        submitBtn.textContent = 'DAFTAR SEKARANG';
+                        submitBtn.disabled = false;
+                    }, 1000);
+                }
+            });
+
+            // Initial validation
+            validateForm();
+        });
     </script>
 </body>
 </html>
