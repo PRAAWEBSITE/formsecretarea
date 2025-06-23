@@ -241,18 +241,18 @@
         /* Theme Toggle */
         .theme-toggle {
             position: fixed;
-            top: 25px;
-            right: 25px;
+            top: 10px;
+            right: 10px;
             background: var(--secondary-bg);
             border: 2px solid var(--accent-gold);
-            border-radius: 50px;
-            padding: 12px 25px;
+            border-radius: 500px;
+            padding: 15px 15px;
             cursor: pointer;
             transition: all 0.4s ease;
             z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 0px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
@@ -578,7 +578,7 @@
     <!-- Theme Toggle -->
     <div class="theme-toggle" onclick="toggleTheme()">
         <span class="theme-icon" id="themeIcon">🌙</span>
-        <span id="themeText">Dark</span>
+        <span id="themeText"></span>
     </div>
 
     <!-- Header -->
@@ -701,12 +701,12 @@
             
             if (body.classList.contains('light-theme')) {
                 themeIcon.textContent = '☀️';
-                themeText.textContent = 'Light';
+                themeText.textContent = '';
                 localStorage.setItem('theme', 'light');
             } else {
                 themeIcon.textContent = '🌙';
-                themeText.textContent = 'Dark';
-                localStorage.setItem('theme', 'dark');
+                themeText.textContent = '';
+                localStorage.setItem('theme', '');
             }
         }
 
@@ -821,7 +821,7 @@
                 linkTiktok: document.getElementById('linkTiktok').value
             };
 
-            const message = `PENDAFTARAN SECRET AREA
+            const message = `
 
 Halo Admin SECRET AREA, saya ingin mendaftar.
 
