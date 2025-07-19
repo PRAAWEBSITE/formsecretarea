@@ -610,6 +610,16 @@
                     <input type="text" class="form-input" id="idGame" required placeholder="Masukkan ID game utama Anda">
                     <div class="error-message" id="idGameError"></div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="form-label">DIVISI *</label>
+                <select class="form-input" id="divisi" name="divisi" required>
+                <option value="" disabled selected>Pilih Divisi</option>
+                <option value="Clan Official">Clan Official</option>
+                <option value="Clan Circle">Clan Circle</option>
+                </select>
+                </div>
+                        </select>
 
                 <div class="form-group">
                     <label class="form-label">DOMISILI *</label>
@@ -617,6 +627,7 @@
                         <select class="form-input" id="provinsi" required>
                             <option value="">Pilih Provinsi</option>
                         </select>
+
                     </div>
                     <div class="error-message" id="domisiliError"></div>
                 </div>
@@ -816,6 +827,7 @@
                 namaLengkap: document.getElementById('namaLengkap').value,
                 nickname: document.getElementById('nickname').value,
                 idGame: document.getElementById('idGame').value,
+                divisi: document.getElementById('divisi').value, // ✅ ambil langsung dari form
                 provinsi: document.getElementById('provinsi').value,
                 umur: document.getElementById('umur').value,
                 linkTiktok: document.getElementById('linkTiktok').value
@@ -828,6 +840,7 @@ Halo Admin SECRET AREA, saya ingin mendaftar.
  Nama Lengkap: ${formData.namaLengkap}
  Nickname: ${formData.nickname}
  ID Game: ${formData.idGame}
+ Divisi: ${formData.divisi}
  Domisili: ${formData.provinsi}
  Umur: ${formData.umur}
  Link TikTok: ${formData.linkTiktok}
