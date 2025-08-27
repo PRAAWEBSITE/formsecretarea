@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECRET AREA - Pendaftaran</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Advanced animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            animation: backgroundPulse 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Floating particles */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 215, 0, 0.4), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 215, 0, 0.3), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255, 215, 0, 0.5), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 215, 0, 0.4), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255, 215, 0, 0.3), transparent),
+                radial-gradient(1px 1px at 200px 60px, rgba(255, 215, 0, 0.6), transparent),
+                radial-gradient(2px 2px at 240px 90px, rgba(255, 215, 0, 0.2), transparent);
+            background-repeat: repeat;
+            background-size: 300px 150px;
+            animation: floatingParticles 25s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: titleEntrance 2.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            opacity: 0;
+            transform: translateY(-60px) scale(0.7) rotateX(15deg);
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffc107, #ffd700, #ffb300);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: luxuryGoldShimmer 5s ease-in-out infinite;
+            text-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.6),
+                0 0 60px rgba(255, 215, 0, 0.3),
+                0 0 100px rgba(255, 215, 0, 0.1);
+            letter-spacing: 4px;
+            position: relative;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.4));
+        }
+
+        .title::before {
+            content: '✦';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffd700;
+            font-size: 1.5rem;
+            animation: starRotate 4s linear infinite;
+        }
+
+        .title::after {
+            content: '✦';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffd700;
+            font-size: 1.5rem;
+            animation: starRotate 4s linear infinite reverse;
+        }
+
+        .subtitle {
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: subtitleGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(204, 204, 204, 0.3);
+        }
+
+        .form-card {
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: 30px;
+            padding: 45px 35px;
+            backdrop-filter: blur(30px);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 215, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: cardMagicEntrance 2s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards;
+            opacity: 0;
+            transform: translateY(80px) rotateX(20deg) scale(0.8);
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffc107, #ffd700);
+            border-radius: 30px;
+            z-index: -1;
+            animation: borderFlow 4s linear infinite;
+        }
+
+        .form-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            opacity: 0;
+            animation: cardAura 6s ease-in-out infinite;
+            border-radius: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+            position: relative;
+            animation: formGroupMagic 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            opacity: 0;
+            transform: translateX(-50px) rotateY(15deg);
+        }
+
+        .form-group:nth-child(1) { animation-delay: 1.3s; }
+        .form-group:nth-child(2) { animation-delay: 1.4s; }
+        .form-group:nth-child(3) { animation-delay: 1.5s; }
+        .form-group:nth-child(4) { animation-delay: 1.6s; }
+        .form-group:nth-child(5) { animation-delay: 1.7s; }
+        .form-group:nth-child(6) { animation-delay: 1.8s; }
+        .form-group:nth-child(7) { animation-delay: 1.9s; }
+        .form-group:nth-child(8) { animation-delay: 2.0s; }
+
+        .form-label {
+            display: block;
+            margin-bottom: 12px;
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            transition: all 0.4s ease;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .form-label::before {
+            content: '◆';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffd700;
+            font-size: 0.8rem;
+            opacity: 0;
+            animation: labelIcon 3s ease-in-out infinite;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 20px 28px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 18px;
+            color: #ffffff;
+            font-size: 1.05rem;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            outline: none;
+            position: relative;
+            backdrop-filter: blur(15px);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: #ffd700;
+            box-shadow: 
+                0 0 0 6px rgba(255, 215, 0, 0.15),
+                0 0 40px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px) scale(1.03);
+            background: rgba(15, 15, 15, 0.95);
+            animation: inputGlow 0.6s ease-out;
+        }
+
+        .form-group:focus-within .form-label {
+            color: #ffed4e;
+            transform: scale(1.05);
+            text-shadow: 0 0 25px rgba(255, 237, 78, 0.6);
+        }
+
+        .form-group:focus-within .form-label::before {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.2);
+            animation: labelIconActive 1s ease-out;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.4s ease;
+            font-style: italic;
+        }
+
+        .form-input:focus::placeholder {
+            color: rgba(255, 215, 0, 0.7);
+            transform: translateX(8px);
+        }
+
+        .age-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 22px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffc107 50%, #ffb300 75%, #ffd700 100%);
+            background-size: 300% 300%;
+            border: none;
+            border-radius: 20px;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            margin-top: 25px;
+            box-shadow: 
+                0 15px 35px rgba(255, 215, 0, 0.4),
+                0 5px 15px rgba(255, 215, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+            animation: buttonMagicEntrance 1.5s ease-out 2.3s forwards;
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.8s ease;
+        }
+
+        .submit-btn::after {
+            content: '🚀';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 25px 50px rgba(255, 215, 0, 0.6),
+                0 10px 30px rgba(255, 215, 0, 0.4);
+            background-position: 100% 100%;
+            animation: buttonPulse 0.8s ease-out;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover::after {
+            transform: translateY(-50%) rotate(15deg) scale(1.2);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .floating-chat {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #25D366, #128C7E, #075E54);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 
+                0 10px 30px rgba(37, 211, 102, 0.5),
+                0 0 0 0 rgba(37, 211, 102, 0.8),
+                0 0 50px rgba(37, 211, 102, 0.3);
+            animation: floatingMagic 4s ease-in-out infinite;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .floating-chat::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #25D366, #128C7E, #25D366);
+            border-radius: 50%;
+            z-index: -1;
+            animation: chatRing 3s linear infinite;
+        }
+
+        .floating-chat:hover {
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 
+                0 20px 40px rgba(37, 211, 102, 0.7),
+                0 0 80px rgba(37, 211, 102, 0.5);
+        }
+
+        .floating-chat i {
+            color: #ffffff;
+            font-size: 1.8rem;
+            animation: whatsappIcon 3s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            color: #25D366;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(15px) scale(0.7);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            border: 1px solid rgba(37, 211, 102, 0.4);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .floating-chat:hover .tooltip {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 20px;
+            animation: footerMagic 1.5s ease-out 2.8s forwards;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(20, 20, 20, 0.9);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 1.4rem;
+            text-decoration: none;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: all 0.5s ease;
+            border-radius: 50%;
+        }
+
+        .social-icon:hover {
+            border-color: #ffd700;
+            box-shadow: 
+                0 0 40px rgba(255, 215, 0, 0.6),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
+            transform: translateY(-8px) scale(1.15) rotate(5deg);
+            color: #ffed4e;
+        }
+
+        .social-icon:hover::before {
+            opacity: 1;
+        }
+
+        .note {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-weight: 300;
+            letter-spacing: 0.8px;
+            text-shadow: 0 0 10px rgba(204, 204, 204, 0.2);
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Advanced Keyframe Animations */
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            33% { background-position: 100% 50%; }
+            66% { background-position: 50% 100%; }
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        @keyframes floatingParticles {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            33% { transform: translateY(-50px) translateX(30px) rotate(120deg); }
+            66% { transform: translateY(-30px) translateX(-20px) rotate(240deg); }
+            100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
+        }
+
+        @keyframes titleEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(-60px) scale(0.7) rotateX(15deg);
+                filter: blur(10px);
+            }
+            60% {
+                opacity: 0.8;
+                transform: translateY(-10px) scale(1.1) rotateX(0deg);
+                filter: blur(2px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0deg);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes luxuryGoldShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 200% 50%; }
+            75% { background-position: 100% 50%; }
+        }
+
+        @keyframes starRotate {
+            0% { transform: translateY(-50%) rotate(0deg) scale(1); }
+            50% { transform: translateY(-50%) rotate(180deg) scale(1.2); }
+            100% { transform: translateY(-50%) rotate(360deg) scale(1); }
+        }
+
+        @keyframes subtitleGlow {
+            0%, 100% { 
+                opacity: 0.9; 
+                text-shadow: 0 0 20px rgba(204, 204, 204, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1; 
+                text-shadow: 0 0 30px rgba(204, 204, 204, 0.6);
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes cardMagicEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(80px) rotateX(20deg) scale(0.8);
+                filter: blur(5px);
+            }
+            70% {
+                opacity: 0.9;
+                transform: translateY(-10px) rotateX(0deg) scale(1.05);
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes borderFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes cardAura {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.02); }
+        }
+
+        @keyframes formGroupMagic {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) rotateY(15deg);
+                filter: blur(3px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotateY(0deg);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes labelIcon {
+            0%, 100% { opacity: 0; transform: translateY(-50%) scale(0.8); }
+            50% { opacity: 0.6; transform: translateY(-50%) scale(1.1); }
+        }
+
+        @keyframes labelIconActive {
+            0% { transform: translateY(-50%) scale(0.8) rotate(0deg); }
+            50% { transform: translateY(-50%) scale(1.3) rotate(180deg); }
+            100% { transform: translateY(-50%) scale(1.2) rotate(360deg); }
+        }
+
+        @keyframes inputGlow {
+            0% { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.15); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.3); }
+            100% { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.15); }
+        }
+
+        @keyframes buttonMagicEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+                filter: blur(3px);
+            }
+            60% {
+                opacity: 0.8;
+                transform: translateY(-5px) scale(1.1);
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: translateY(-8px) scale(1.05); }
+            50% { transform: translateY(-12px) scale(1.08); }
+            100% { transform: translateY(-8px) scale(1.05); }
+        }
+
+        @keyframes floatingMagic {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                box-shadow: 
+                    0 10px 30px rgba(37, 211, 102, 0.5),
+                    0 0 0 0 rgba(37, 211, 102, 0.8);
+            }
+            25% {
+                transform: translateY(-8px) rotate(5deg) scale(1.05);
+            }
+            50% {
+                transform: translateY(-5px) rotate(0deg) scale(1.1);
+                box-shadow: 
+                    0 15px 40px rgba(37, 211, 102, 0.7),
+                    0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            75% {
+                transform: translateY(-8px) rotate(-5deg) scale(1.05);
+            }
+        }
+
+        @keyframes chatRing {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        @keyframes whatsappIcon {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        @keyframes footerMagic {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+                filter: blur(2px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .title::before,
+            .title::after {
+                font-size: 1.2rem;
+            }
+            
+            .form-card {
+                padding: 35px 25px;
+            }
+            
+            .floating-chat {
+                width: 60px;
+                height: 60px;
+                bottom: 25px;
+                right: 25px;
+            }
+            
+            .floating-chat i {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">SECRET AREA</h1>
+            <p class="subtitle">Formulir Pendaftaran Eksklusif</p>
+        </div>
+
+        <div class="form-card">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-input" id="namaLengkap" placeholder="Masukkan nama lengkap Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nickname</label>
+                    <input type="text" class="form-input" id="nickname" placeholder="Masukkan nickname gaming" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">ID Game</label>
+                    <input type="text" class="form-input" id="idGame" placeholder="Masukkan ID Game Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Join Clan</label>
+                    <select class="form-select" id="joinClan" required>
+                        <option value="">Pilih Clan Tujuan</option>
+                        <option value="Clan OFFICIAL">🏆 Clan OFFICIAL</option>
+                        <option value="Clan Circle">⭕ Clan Circle</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Provinsi</label>
+                    <select class="form-select" id="provinsi" required>
+                        <option value="">Pilih Provinsi</option>
+                        <option value="Aceh">Aceh</option>
+                        <option value="Sumatera Utara">Sumatera Utara</option>
+                        <option value="Sumatera Barat">Sumatera Barat</option>
+                        <option value="Riau">Riau</option>
+                        <option value="Kepulauan Riau">Kepulauan Riau</option>
+                        <option value="Jambi">Jambi</option>
+                        <option value="Sumatera Selatan">Sumatera Selatan</option>
+                        <option value="Bangka Belitung">Bangka Belitung</option>
+                        <option value="Bengkulu">Bengkulu</option>
+                        <option value="Lampung">Lampung</option>
+                        <option value="DKI Jakarta">DKI Jakarta</option>
+                        <option value="Jawa Barat">Jawa Barat</option>
+                        <option value="Jawa Tengah">Jawa Tengah</option>
+                        <option value="DI Yogyakarta">DI Yogyakarta</option>
+                        <option value="Jawa Timur">Jawa Timur</option>
+                        <option value="Banten">Banten</option>
+                        <option value="Bali">Bali</option>
+                        <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
+                        <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
+                        <option value="Kalimantan Barat">Kalimantan Barat</option>
+                        <option value="Kalimantan Tengah">Kalimantan Tengah</option>
+                        <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+                        <option value="Kalimantan Timur">Kalimantan Timur</option>
+                        <option value="Kalimantan Utara">Kalimantan Utara</option>
+                        <option value="Sulawesi Utara">Sulawesi Utara</option>
+                        <option value="Sulawesi Tengah">Sulawesi Tengah</option>
+                        <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                        <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+                        <option value="Gorontalo">Gorontalo</option>
+                        <option value="Sulawesi Barat">Sulawesi Barat</option>
+                        <option value="Maluku">Maluku</option>
+                        <option value="Maluku Utara">Maluku Utara</option>
+                        <option value="Papua">Papua</option>
+                        <option value="Papua Barat">Papua Barat</option>
+                        <option value="Papua Selatan">Papua Selatan</option>
+                        <option value="Papua Tengah">Papua Tengah</option>
+                        <option value="Papua Pegunungan">Papua Pegunungan</option>
+                        <option value="Papua Barat Daya">Papua Barat Daya</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Kota</label>
+                    <input type="text" class="form-input" id="kota" placeholder="Masukkan nama kota" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Usia</label>
+                    <div class="age-group">
+                        <select class="form-select" id="bulan" required>
+                            <option value="">Bulan</option>
+                            <option value="Januari">Januari</option>
+                            <option value="Februari">Februari</option>
+                            <option value="Maret">Maret</option>
+                            <option value="April">April</option>
+                            <option value="Mei">Mei</option>
+                            <option value="Juni">Juni</option>
+                            <option value="Juli">Juli</option>
+                            <option value="Agustus">Agustus</option>
+                            <option value="September">September</option>
+                            <option value="Oktober">Oktober</option>
+                            <option value="November">November</option>
+                            <option value="Desember">Desember</option>
+                        </select>
+                        
+                        <select class="form-select" id="tahun" required>
+                            <option value="">Tahun</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Link TikTok</label>
+                    <input type="url" class="form-input" id="linkTiktok" placeholder="https://www.tiktok.com/@username" required>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-rocket"></i> Daftar Sekarang
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat" onclick="openRandomWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+        <div class="tooltip">💬 Chat Admin</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="social-icons">
+            <a href="#" class="social-icon" onclick="openTiktok()">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="#" class="social-icon" onclick="openInstagram()">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        
+        <p class="note">
+            <strong>⚠️ PENTING:</strong> Wajib mengikuti semua social media official SECRET AREA untuk mendapatkan update terbaru dan informasi eksklusif
+        </p>
+        
+        <p class="copyright">
+            ✨ © 2025 SECRET AREA. All Rights Reserved. ✨
+        </p>
+    </div>
+
+    <script>
+        // Generate years for age dropdown (from 1960 to current year)
+        const tahunSelect = document.getElementById('tahun');
+        const currentYear = new Date().getFullYear();
+        
+        for (let year = currentYear; year >= 1960; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            tahunSelect.appendChild(option);
+        }
+
+        // Admin WhatsApp numbers
+        const adminNumbers = ['6287732771561', '6285272535526'];
+
+        // Function to get random admin number
+        function getRandomAdminNumber() {
+            const randomIndex = Math.floor(Math.random() * adminNumbers.length);
+            return adminNumbers[randomIndex];
+        }
+
+        // Function to get current time
+        function getCurrentTime() {
+            const now = new Date();
+            const options = { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit',
+                timeZone: 'Asia/Jakarta'
+            };
+            return now.toLocaleDateString('id-ID', options);
+        }
+
+        // Function to open random WhatsApp
+        function openRandomWhatsApp() {
+            const adminNumber = getRandomAdminNumber();
+            const currentTime = getCurrentTime();
+            const message = `🔥 HALO ADMIN SECRET AREA! 🔥
+
+Selamat ${getGreeting()}! Saya ingin bertanya mengenai pendaftaran clan.
+
+⏰ Waktu: ${currentTime}
+🎯 Keperluan: Informasi Pendaftaran SECRET AREA
+💬 Status: Calon Member Baru
+
+Mohon informasinya ya admin! Terima kasih 🙏✨`;
+            
+            const whatsappUrl = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Function to get greeting based on time
+        function getGreeting() {
+            const hour = new Date().getHours();
+            if (hour < 12) return "Pagi";
+            if (hour < 15) return "Siang";
+            if (hour < 18) return "Sore";
+            return "Malam";
+        }
+
+        // Function to open TikTok
+        function openTiktok() {
+            window.open('https://www.tiktok.com/@sear_officialreal?is_from_webapp=1&sender_device=pc', '_blank');
+        }
+
+        // Function to open Instagram
+        function openInstagram() {
+            window.open('https://www.instagram.com/sear_pubgmobile/?igsh=NDJvM2thYXV4YTNy', '_blank');
+        }
+
+        // Form submission handler
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Add loading animation to button
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses Data...';
+            submitBtn.style.pointerEvents = 'none';
+            submitBtn.style.background = 'linear-gradient(135deg, #cccccc, #999999)';
+            
+            // Get form data
+            const namaLengkap = document.getElementById('namaLengkap').value;
+            const nickname = document.getElementById('nickname').value;
+            const idGame = document.getElementById('idGame').value;
+            const joinClan = document.getElementById('joinClan').value;
+            const provinsi = document.getElementById('provinsi').value;
+            const kota = document.getElementById('kota').value;
+            const bulan = document.getElementById('bulan').value;
+            const tahun = document.getElementById('tahun').value;
+            const linkTiktok = document.getElementById('linkTiktok').value;
+            
+            // Validate all fields
+            if (!namaLengkap || !nickname || !idGame || !joinClan || !provinsi || !kota || !bulan || !tahun || !linkTiktok) {
+                alert('❌ Mohon lengkapi semua field yang diperlukan untuk melanjutkan pendaftaran!');
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.pointerEvents = 'auto';
+                submitBtn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffc107 50%, #ffb300 75%, #ffd700 100%)';
+                return;
+            }
+            
+            // Format domicile and age
+            const domisili = `${kota}, ${provinsi}`;
+            const usia = `${bulan} ${tahun}`;
+            const currentTime = getCurrentTime();
+            
+            // Create enhanced WhatsApp message
+            const message = `🎮 FORMULIR PENDAFTARAN SECRET AREA 🎮
+
+═══════════════════════════════
+📋 DATA PENDAFTAR
+═══════════════════════════════
+
+👤 Nama Lengkap: ${namaLengkap}
+🎯 Nickname: ${nickname}
+🆔 ID Game: ${idGame}
+🏆 Join Clan: ${joinClan}
+📍 Domisili: ${domisili}
+🎂 Usia: ${usia}
+📱 Link TikTok: ${linkTiktok}
+
+⏰ Waktu Pendaftaran: ${currentTime}
+🌟 Status: PENDAFTAR BARU
+
+═══════════════════════════════
+💼 ADMIN MOHON SEGERA DIPROSES
+═══════════════════════════════
+
+Terima kasih admin! 🙏✨
+
+#SECRETAREA #Gaming #Pendaftaran`;
+            
+            // Get random admin number
+            const adminNumber = getRandomAdminNumber();
+            
+            // Simulate processing time with realistic delay
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Berhasil! Membuka WhatsApp...';
+                submitBtn.style.background = 'linear-gradient(135deg, #25D366, #128C7E)';
+                
+                setTimeout(() => {
+                    // Open WhatsApp with the enhanced message
+                    const whatsappUrl = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Reset button after WhatsApp opens
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.pointerEvents = 'auto';
+                        submitBtn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffc107 50%, #ffb300 75%, #ffd700 100%)';
+                        
+                        // Show success message
+                        alert('✅ Data berhasil dikirim ke admin! Silakan cek WhatsApp Anda.');
+                    }, 2000);
+                }, 1000);
+            }, 2000);
+        });
+
+        // Enhanced input interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.form-input, .form-select');
+            
+            inputs.forEach((input, index) => {
+                // Add enhanced typing effect
+                input.addEventListener('input', function() {
+                    this.style.boxShadow = '0 0 25px rgba(255, 215, 0, 0.5)';
+                    this.style.borderColor = '#ffed4e';
+                    
+                    setTimeout(() => {
+                        if (!this.matches(':focus')) {
+                            this.style.boxShadow = '';
+                            this.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                        }
+                    }, 500);
+                });
+
+                // Add premium focus transitions
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateZ(15px) rotateY(2deg)';
+                    this.parentElement.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateZ(0) rotateY(0deg)';
+                });
+            });
+
+            // Add page completion effect
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+                document.body.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        // Enhanced mouse parallax effect for desktop
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', function(e) {
+                const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+                
+                document.querySelector('.form-card').style.transform = 
+                    `translate3d(${mouseX * 8}px, ${mouseY * 8}px, 0) rotateY(${mouseX * 3}deg) rotateX(${mouseY * 3}deg)`;
+                
+                document.querySelector('.header').style.transform = 
+                    `translate3d(${mouseX * 5}px, ${mouseY * 5}px, 0)`;
+                
+                document.querySelector('.floating-chat').style.transform = 
+                    `translate3d(${mouseX * -10}px, ${mouseY * -10}px, 0)`;
+            });
+        }
+
+        // Add scroll animations
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollProgress = scrollY / maxScroll;
+            
+            document.body.style.background = `
+                linear-gradient(135deg, 
+                    hsl(0, 0%, ${4 + scrollProgress * 10}%) 0%, 
+                    hsl(0, 0%, ${10 + scrollProgress * 15}%) 25%, 
+                    hsl(0, 0%, ${18 + scrollProgress * 20}%) 50%, 
+                    hsl(0, 0%, ${10 + scrollProgress * 15}%) 75%, 
+                    hsl(0, 0%, ${4 + scrollProgress * 10}%) 100%)
+            `;
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Alt + W to open WhatsApp
+            if (e.altKey && e.key === 'w') {
+                e.preventDefault();
+                openRandomWhatsApp();
+            }
+            
+            // Alt + T to open TikTok
+            if (e.altKey && e.key === 't') {
+                e.preventDefault();
+                openTiktok();
+            }
+            
+            // Alt + I to open Instagram
+            if (e.altKey && e.key === 'i') {
+                e.preventDefault();
+                openInstagram();
+            }
+        });
+
+        // Add form auto-save to localStorage
+        const form = document.getElementById('registrationForm');
+        const formInputs = form.querySelectorAll('input, select');
+
+        formInputs.forEach(input => {
+            // Load saved data
+            const savedValue = localStorage.getItem(`secret_area_${input.id}`);
+            if (savedValue && savedValue !== 'null') {
+                input.value = savedValue;
+            }
+
+            // Save data on input
+            input.addEventListener('input', function() {
+                localStorage.setItem(`secret_area_${input.id}`, input.value);
+            });
+        });
+
+        // Clear saved data after successful submission
+        form.addEventListener('submit', function() {
+            setTimeout(() => {
+                formInputs.forEach(input => {
+                    localStorage.removeItem(`secret_area_${input.id}`);
+                });
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
+
