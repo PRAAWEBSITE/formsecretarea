@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SECRET AREA - Pendaftaran</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,155 +14,283 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
+            font-family: 'Exo 2', 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0f0f0f 100%);
             min-height: 100vh;
-            color: #ffffff;
+            color: #fff;
             overflow-x: hidden;
             position: relative;
+            font-weight: 400;
         }
 
-        /* Advanced animated background */
+        /* Multiple layers of falling particles */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
+            top: -300px;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
-            animation: backgroundPulse 8s ease-in-out infinite;
+            height: calc(100% + 600px);
+            background-image: 
+                radial-gradient(4px 4px at 10% 15%, rgba(255, 215, 0, 0.6), transparent),
+                radial-gradient(3px 3px at 90% 25%, rgba(255, 237, 78, 0.4), transparent),
+                radial-gradient(2px 2px at 30% 35%, rgba(255, 215, 0, 0.7), transparent),
+                radial-gradient(3px 3px at 70% 45%, rgba(255, 237, 78, 0.5), transparent),
+                radial-gradient(1px 1px at 50% 55%, rgba(255, 215, 0, 0.8), transparent),
+                radial-gradient(2px 2px at 20% 65%, rgba(255, 237, 78, 0.4), transparent),
+                radial-gradient(4px 4px at 80% 75%, rgba(255, 215, 0, 0.6), transparent),
+                radial-gradient(2px 2px at 40% 85%, rgba(255, 237, 78, 0.5), transparent);
+            animation: cascadingParticles 25s linear infinite;
             pointer-events: none;
-            z-index: 1;
+            z-index: -3;
         }
 
-        /* Floating particles */
         body::after {
             content: '';
             position: fixed;
-            top: 0;
+            top: -400px;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: calc(100% + 800px);
             background-image: 
-                radial-gradient(2px 2px at 20px 30px, rgba(255, 215, 0, 0.4), transparent),
-                radial-gradient(2px 2px at 40px 70px, rgba(255, 215, 0, 0.3), transparent),
-                radial-gradient(1px 1px at 90px 40px, rgba(255, 215, 0, 0.5), transparent),
-                radial-gradient(1px 1px at 130px 80px, rgba(255, 215, 0, 0.4), transparent),
-                radial-gradient(2px 2px at 160px 30px, rgba(255, 215, 0, 0.3), transparent),
-                radial-gradient(1px 1px at 200px 60px, rgba(255, 215, 0, 0.6), transparent),
-                radial-gradient(2px 2px at 240px 90px, rgba(255, 215, 0, 0.2), transparent);
-            background-repeat: repeat;
-            background-size: 300px 150px;
-            animation: floatingParticles 25s linear infinite;
+                radial-gradient(2px 2px at 15% 10%, rgba(255, 215, 0, 0.3), transparent),
+                radial-gradient(1px 1px at 85% 20%, rgba(255, 237, 78, 0.4), transparent),
+                radial-gradient(3px 3px at 25% 30%, rgba(255, 215, 0, 0.5), transparent),
+                radial-gradient(2px 2px at 75% 40%, rgba(255, 237, 78, 0.3), transparent),
+                radial-gradient(1px 1px at 45% 50%, rgba(255, 215, 0, 0.6), transparent),
+                radial-gradient(2px 2px at 65% 60%, rgba(255, 237, 78, 0.4), transparent),
+                radial-gradient(3px 3px at 35% 70%, rgba(255, 215, 0, 0.5), transparent),
+                radial-gradient(1px 1px at 55% 80%, rgba(255, 237, 78, 0.3), transparent);
+            animation: cascadingParticles 30s linear infinite reverse;
             pointer-events: none;
-            z-index: 2;
-            opacity: 0.7;
+            z-index: -2;
+        }
+
+        @keyframes cascadingParticles {
+            0% { 
+                transform: translateY(-400px) translateX(-20px) rotate(0deg); 
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            15% { 
+                transform: translateY(-200px) translateX(10px) rotate(45deg); 
+            }
+            30% { 
+                transform: translateY(0px) translateX(-5px) rotate(90deg); 
+            }
+            45% { 
+                transform: translateY(200px) translateX(15px) rotate(135deg); 
+            }
+            60% { 
+                transform: translateY(400px) translateX(-10px) rotate(180deg); 
+            }
+            75% { 
+                transform: translateY(600px) translateX(8px) rotate(225deg); 
+            }
+            90% { 
+                transform: translateY(800px) translateX(-3px) rotate(270deg); 
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(calc(100vh + 400px)) translateX(0px) rotate(360deg); 
+                opacity: 0;
+            }
+        }
+
+        /* Smooth text animation for title */
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 
+                    0 0 10px rgba(255, 215, 0, 0.8),
+                    0 0 20px rgba(255, 215, 0, 0.6),
+                    0 0 30px rgba(255, 215, 0, 0.4);
+                filter: brightness(1) contrast(1);
+            }
+            50% {
+                text-shadow: 
+                    0 0 20px rgba(255, 237, 78, 1),
+                    0 0 40px rgba(255, 237, 78, 0.8),
+                    0 0 60px rgba(255, 237, 78, 0.6),
+                    0 0 80px rgba(255, 215, 0, 0.4);
+                filter: brightness(1.2) contrast(1.1);
+            }
+            100% {
+                text-shadow: 
+                    0 0 10px rgba(255, 215, 0, 0.8),
+                    0 0 20px rgba(255, 215, 0, 0.6),
+                    0 0 30px rgba(255, 215, 0, 0.4);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        /* Animasi cahaya bergerak mengikuti outline border */
+        @keyframes outlineChase {
+            0% {
+                background: conic-gradient(
+                    from 0deg,
+                    rgba(255, 215, 0, 1) 0deg,
+                    rgba(255, 237, 78, 0.8) 15deg,
+                    transparent 30deg,
+                    transparent 330deg,
+                    rgba(255, 237, 78, 0.8) 345deg,
+                    rgba(255, 215, 0, 1) 360deg
+                );
+            }
+            100% {
+                background: conic-gradient(
+                    from 360deg,
+                    rgba(255, 215, 0, 1) 0deg,
+                    rgba(255, 237, 78, 0.8) 15deg,
+                    transparent 30deg,
+                    transparent 330deg,
+                    rgba(255, 237, 78, 0.8) 345deg,
+                    rgba(255, 215, 0, 1) 360deg
+                );
+            }
+        }
+
+        @keyframes elegantFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px) scale(0.95);
+                filter: blur(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes cascadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-80px) scale(1.1);
+                filter: blur(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes smoothBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-12px);
+            }
+            60% {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes elegantPulse {
+            0% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.03);
+                filter: brightness(1.15);
+            }
+            100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+        }
+
+        /* Falling elements animation */
+        @keyframes elementCascade {
+            from {
+                opacity: 0;
+                transform: translateY(-100px) rotateX(90deg);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+                filter: blur(0px);
+            }
         }
 
         .container {
             max-width: 420px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 10;
+            padding: 30px;
+            animation: cascadeSlideDown 2s ease-out;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            animation: titleEntrance 2.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-            opacity: 0;
-            transform: translateY(-60px) scale(0.7) rotateX(15deg);
+            margin-bottom: 50px;
+            animation: cascadeSlideDown 1.5s ease-out 0.3s both;
         }
 
         .title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #050503, #ffed4e, #ffc107, #ffd700, #ffb300);
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(45deg, #ffd700 0%, #ffed4e 25%, #ffffff 50%, #ffed4e 75%, #ffd700 100%);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: luxuryGoldShimmer 5s ease-in-out infinite;
-            text-shadow: 
-                0 0 30px rgba(255, 215, 0, 0.6),
-                0 0 60px rgba(255, 215, 0, 0.3),
-                0 0 100px rgba(255, 215, 0, 0.1);
-            letter-spacing: 4px;
-            position: relative;
             margin-bottom: 20px;
-            filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.4));
-        }
-
-        .title::before {
-            content: '✦';
-            position: absolute;
-            left: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #ffd700;
-            font-size: 1.5rem;
-            animation: starRotate 4s linear infinite;
-        }
-
-        .title::after {
-            content: '✦';
-            position: absolute;
-            right: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #ffd700;
-            font-size: 1.5rem;
-            animation: starRotate 4s linear infinite reverse;
+            letter-spacing: 5px;
+            position: relative;
+            display: inline-block;
+            animation: titleGlow 3s ease-in-out infinite, elegantPulse 5s ease-in-out infinite;
+            text-transform: uppercase;
         }
 
         .subtitle {
-            color: #cccccc;
-            font-size: 1.1rem;
-            margin-top: 20px;
+            color: #ddd;
+            font-size: 1.15rem;
             opacity: 0.9;
+            font-style: italic;
             font-weight: 300;
-            letter-spacing: 2px;
-            animation: subtitleGlow 3s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(204, 204, 204, 0.3);
+            font-family: 'Exo 2', sans-serif;
+            letter-spacing: 1.2px;
+            animation: cascadeSlideDown 1s ease-out 0.8s both;
         }
 
         .form-card {
-            background: rgba(20, 20, 20, 0.95);
-            border-radius: 30px;
-            padding: 45px 35px;
-            backdrop-filter: blur(30px);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255, 215, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                inset 0 -1px 0 rgba(255, 215, 0, 0.1);
+            background: rgba(25, 25, 25, 0.95);
+            border-radius: 35px;
+            padding: 45px 40px;
+            border: 3px solid #ffd700;
+            backdrop-filter: blur(25px);
             position: relative;
-            overflow: hidden;
-            animation: cardMagicEntrance 2s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards;
-            opacity: 0;
-            transform: translateY(80px) rotateX(20deg) scale(0.8);
+            overflow: visible;
+            animation: elementCascade 1.8s ease-out 1s both;
         }
 
+        /* Cahaya bergerak mengikuti outline form card */
         .form-card::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #5d5c57, #8f8a72, #ffc107, #7d7b71);
-            border-radius: 30px;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 35px;
+            padding: 3px;
+            background: conic-gradient(
+                from 0deg,
+                rgba(255, 215, 0, 1) 0deg,
+                rgba(255, 237, 78, 0.8) 15deg,
+                transparent 30deg,
+                transparent 330deg,
+                rgba(255, 237, 78, 0.8) 345deg,
+                rgba(255, 215, 0, 1) 360deg
+            );
+            animation: outlineChase 4s linear infinite;
             z-index: -1;
-            animation: borderFlow 4s linear infinite;
         }
 
         .form-card::after {
@@ -171,105 +300,98 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
-            pointer-events: none;
-            opacity: 0;
-            animation: cardAura 6s ease-in-out infinite;
-            border-radius: 30px;
+            background: rgba(25, 25, 25, 0.95);
+            border-radius: 32px;
+            z-index: -1;
         }
 
         .form-group {
-            margin-bottom: 28px;
+            margin-bottom: 32px;
+            animation: elementCascade 1s ease-out calc(1.2s + var(--delay)) both;
             position: relative;
-            animation: formGroupMagic 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            opacity: 0;
-            transform: translateX(-50px) rotateY(15deg);
+            z-index: 1;
         }
 
-        .form-group:nth-child(1) { animation-delay: 1.3s; }
-        .form-group:nth-child(2) { animation-delay: 1.4s; }
-        .form-group:nth-child(3) { animation-delay: 1.5s; }
-        .form-group:nth-child(4) { animation-delay: 1.6s; }
-        .form-group:nth-child(5) { animation-delay: 1.7s; }
-        .form-group:nth-child(6) { animation-delay: 1.8s; }
-        .form-group:nth-child(7) { animation-delay: 1.9s; }
-        .form-group:nth-child(8) { animation-delay: 2.0s; }
+        .form-group:nth-child(1) { --delay: 0.1s; }
+        .form-group:nth-child(2) { --delay: 0.2s; }
+        .form-group:nth-child(3) { --delay: 0.3s; }
+        .form-group:nth-child(4) { --delay: 0.4s; }
+        .form-group:nth-child(5) { --delay: 0.5s; }
+        .form-group:nth-child(6) { --delay: 0.6s; }
+        .form-group:nth-child(7) { --delay: 0.7s; }
 
         .form-label {
             display: block;
             margin-bottom: 12px;
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            position: relative;
-            transition: all 0.4s ease;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-        }
-
-        .form-label::before {
-            content: '◆';
-            position: absolute;
-            left: -20px;
-            top: 50%;
-            transform: translateY(-50%);
             color: #ffd700;
-            font-size: 0.8rem;
-            opacity: 0;
-            animation: labelIcon 3s ease-in-out infinite;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .form-input, .form-select {
             width: 100%;
-            padding: 20px 28px;
-            background: rgba(10, 10, 10, 0.9);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 18px;
-            color: #ffffff;
-            font-size: 1.05rem;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            outline: none;
+            padding: 18px 22px;
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            background: rgba(15, 15, 15, 0.95);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 400;
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            backdrop-filter: blur(15px);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Cahaya bergerak mengikuti outline input */
+        .form-input::before, .form-select::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 20px;
+            background: conic-gradient(
+                from 0deg,
+                rgba(255, 215, 0, 1) 0deg,
+                rgba(255, 237, 78, 0.8) 10deg,
+                transparent 25deg,
+                transparent 335deg,
+                rgba(255, 237, 78, 0.8) 350deg,
+                rgba(255, 215, 0, 1) 360deg
+            );
+            animation: outlineChase 3s linear infinite;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .form-input:focus, .form-select:focus {
-            border-color: #ffd700;
-            box-shadow: 
-                0 0 0 6px rgba(255, 215, 0, 0.15),
-                0 0 40px rgba(255, 215, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateY(-4px) scale(1.03);
-            background: rgba(15, 15, 15, 0.95);
-            animation: inputGlow 0.6s ease-out;
+            outline: none;
+            transform: scale(1.02) translateY(-2px);
+            background: rgba(10, 10, 10, 1);
         }
 
-        .form-group:focus-within .form-label {
-            color: #ffed4e;
-            transform: scale(1.05);
-            text-shadow: 0 0 25px rgba(255, 237, 78, 0.6);
-        }
-
-        .form-group:focus-within .form-label::before {
-            opacity: 1;
-            transform: translateY(-50%) scale(1.2);
-            animation: labelIconActive 1s ease-out;
+        .form-input:focus::before, .form-select:focus::before {
+            animation: outlineChase 1.5s linear infinite;
         }
 
         .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-            transition: all 0.4s ease;
+            color: #aaa;
             font-style: italic;
+            font-weight: 300;
+            font-family: 'Exo 2', sans-serif;
         }
 
-        .form-input:focus::placeholder {
-            color: rgba(255, 215, 0, 0.7);
-            transform: translateX(8px);
+        .domisili-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
         }
 
-        .age-group {
+        .usia-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 18px;
@@ -278,295 +400,413 @@
         .submit-btn {
             width: 100%;
             padding: 22px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffc107 50%, #ffb300 75%, #ffd700 100%);
-            background-size: 300% 300%;
-            border: none;
-            border-radius: 20px;
+            border: 3px solid #ffd700;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffd700 50%, #ffed4e 75%, #ffd700 100%);
+            background-size: 400% 400%;
             color: #1a1a1a;
-            font-size: 1.2rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 35px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
             position: relative;
             overflow: hidden;
-            margin-top: 25px;
-            box-shadow: 
-                0 15px 35px rgba(255, 215, 0, 0.4),
-                0 5px 15px rgba(255, 215, 0, 0.2),
-                inset 0 2px 0 rgba(255, 255, 255, 0.3),
-                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
-            animation: buttonMagicEntrance 1.5s ease-out 2.3s forwards;
-            opacity: 0;
-            transform: translateY(30px) scale(0.9);
+            animation: elementCascade 1s ease-out 2s both;
         }
 
+        /* Cahaya bergerak mengikuti outline tombol submit */
         .submit-btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: all 0.8s ease;
-        }
-
-        .submit-btn::after {
-            content: '🚀';
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            transition: all 0.4s ease;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 25px;
+            background: conic-gradient(
+                from 0deg,
+                rgba(255, 215, 0, 1) 0deg,
+                rgba(255, 237, 78, 1) 8deg,
+                rgba(255, 255, 255, 0.9) 15deg,
+                transparent 25deg,
+                transparent 335deg,
+                rgba(255, 255, 255, 0.9) 345deg,
+                rgba(255, 237, 78, 1) 352deg,
+                rgba(255, 215, 0, 1) 360deg
+            );
+            animation: outlineChase 2s linear infinite;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .submit-btn:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 
-                0 25px 50px rgba(255, 215, 0, 0.6),
-                0 10px 30px rgba(255, 215, 0, 0.4);
-            background-position: 100% 100%;
-            animation: buttonPulse 0.8s ease-out;
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.6);
         }
 
         .submit-btn:hover::before {
-            left: 100%;
-        }
-
-        .submit-btn:hover::after {
-            transform: translateY(-50%) rotate(15deg) scale(1.2);
+            animation: outlineChase 1s linear infinite;
         }
 
         .submit-btn:active {
-            transform: translateY(-4px) scale(1.02);
+            transform: translateY(-3px) scale(1.01);
         }
 
-        .floating-chat {
+        /* WhatsApp Floating Button - Diperkecil */
+        .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #25D366, #128C7E, #075E54);
+            bottom: 35px;
+            right: 35px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366, #1fb854);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
             cursor: pointer;
-            box-shadow: 
-                0 10px 30px rgba(37, 211, 102, 0.5),
-                0 0 0 0 rgba(37, 211, 102, 0.8),
-                0 0 50px rgba(37, 211, 102, 0.3);
-            animation: floatingMagic 4s ease-in-out infinite;
             z-index: 1000;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: smoothBounce 3s ease-in-out infinite;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .floating-chat::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, #25D366, #128C7E, #25D366);
-            border-radius: 50%;
-            z-index: -1;
-            animation: chatRing 3s linear infinite;
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.8);
         }
 
-        .floating-chat:hover {
-            transform: scale(1.2) rotate(10deg);
-            box-shadow: 
-                0 20px 40px rgba(37, 211, 102, 0.7),
-                0 0 80px rgba(37, 211, 102, 0.5);
+        .whatsapp-float i {
+            color: white;
+            font-size: 1.5rem;
+            z-index: 1;
         }
 
-        .floating-chat i {
-            color: #ffffff;
-            font-size: 1.8rem;
-            animation: whatsappIcon 3s ease-in-out infinite;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-        }
-
-        .tooltip {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            background: rgba(0, 0, 0, 0.95);
-            color: #25D366;
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateY(15px) scale(0.7);
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            pointer-events: none;
-            border: 1px solid rgba(37, 211, 102, 0.4);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .floating-chat:hover .tooltip {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
+        /* Footer with elegant styling */
         .footer {
             text-align: center;
-            margin-top: 60px;
-            padding: 40px 20px;
-            animation: footerMagic 1.5s ease-out 2.8s forwards;
-            opacity: 0;
-            transform: translateY(40px);
+            margin-top: 70px;
+            padding: 35px;
+            animation: elementCascade 1.2s ease-out 2.5s both;
         }
 
         .social-icons {
+            margin-bottom: 30px;
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-bottom: 30px;
         }
 
+        /* Social icons tanpa efek cahaya bergerak */
         .social-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(20, 20, 20, 0.9);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 90px;
+            height: 50px;
             color: #ffd700;
-            font-size: 1.4rem;
+            font-size: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 3px solid #ffd700;
+            border-radius: 50px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
-            opacity: 0;
-            transition: all 0.5s ease;
-            border-radius: 50%;
+            font-family: 'Orbitron', monospace;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
         .social-icon:hover {
-            border-color: #ffd700;
-            box-shadow: 
-                0 0 40px rgba(255, 215, 0, 0.6),
-                inset 0 0 20px rgba(255, 215, 0, 0.1);
-            transform: translateY(-8px) scale(1.15) rotate(5deg);
+            transform: scale(1.15) translateY(-3px);
+            filter: drop-shadow(0 0 20px #ffd700);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
             color: #ffed4e;
+            border-color: #ffed4e;
         }
 
-        .social-icon:hover::before {
-            opacity: 1;
-        }
-
-        .note {
-            color: #cccccc;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
-            font-weight: 300;
-            letter-spacing: 0.8px;
-            text-shadow: 0 0 10px rgba(204, 204, 204, 0.2);
+        .footer-note {
+            color: #ddd;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-weight: 400;
+            font-family: 'Exo 2', sans-serif;
+            max-width: 340px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .copyright {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.8rem;
+            color: #aaa;
+            font-size: 0.85rem;
             font-weight: 300;
-            letter-spacing: 1.5px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            font-family: 'Exo 2', sans-serif;
+            letter-spacing: 0.8px;
         }
 
-        /* Advanced Keyframe Animations */
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            33% { background-position: 100% 50%; }
-            66% { background-position: 50% 100%; }
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1a1a1a;
+            padding: 20px 28px;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(255, 215, 0, 0.5);
+            z-index: 1001;
+            transform: translateX(500px) scale(0.8);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            max-width: 360px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
         }
 
-        @keyframes backgroundPulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.1); }
+        .notification.show {
+            transform: translateX(0) scale(1);
         }
 
-        @keyframes floatingParticles {
-            0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-            33% { transform: translateY(-50px) translateX(30px) rotate(120deg); }
-            66% { transform: translateY(-30px) translateX(-20px) rotate(240deg); }
-            100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
+        /* Loading Animation */
+        .loading {
+            opacity: 0.5;
+            pointer-events: none;
         }
 
-        @keyframes titleEntrance {
-            0% {
-                opacity: 0;
-                transform: translateY(-60px) scale(0.7) rotateX(15deg);
-                filter: blur(10px);
+        .loading .submit-btn {
+            background: linear-gradient(135deg, #666, #888, #666);
+            cursor: not-allowed;
+        }
+
+        .loading .submit-btn::before {
+            animation: none;
+        }
+
+        .loading .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 28px;
+            height: 28px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: smoothSpin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            z-index: 2;
+        }
+
+        @keyframes smoothSpin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
             }
-            60% {
-                opacity: 0.8;
-                transform: translateY(-10px) scale(1.1) rotateX(0deg);
-                filter: blur(2px);
+            
+            .title {
+                font-size: 2.8rem;
+                letter-spacing: 4px;
             }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1) rotateX(0deg);
+            
+            .form-card {
+                padding: 35px 30px;
+                border-radius: 30px;
+            }
+            
+            .notification {
+                right: 15px;
+                left: 15px;
+                max-width: none;
+                transform: translateY(-150px) scale(0.9);
+            }
+            
+            .notification.show {
+                transform: translateY(0) scale(1);
+            }
+
+            .social-icons {
+                gap: 25px;
+            }
+
+            .social-icon {
+                width: 80px;
+                height: 45px;
+                font-size: 1.8rem;
+            }
+
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 25px;
+                right: 25px;
+            }
+
+            .whatsapp-float i {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .title {
+                font-size: 2.4rem;
+                letter-spacing: 3px;
+            }
+            
+            .domisili-group, .usia-group {
+                gap: 12px;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Form validation styles */
+        .form-input.invalid, .form-select.invalid {
+            animation: smoothShake 0.8s ease-in-out;
+            border-color: #ff4757;
+        }
+
+        .form-input.invalid::before, .form-select.invalid::before {
+            background: conic-gradient(
+                from 0deg,
+                rgba(255, 71, 87, 1) 0deg,
+                rgba(255, 107, 122, 0.8) 15deg,
+                transparent 30deg,
+                transparent 330deg,
+                rgba(255, 107, 122, 0.8) 345deg,
+                rgba(255, 71, 87, 1) 360deg
+            );
+            animation: outlineChase 2s linear infinite;
+        }
+
+        @keyframes smoothShake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-8px); }
+            80% { transform: translateX(8px); }
+        }
+
+        .form-input.valid, .form-select.valid {
+            border-color: #2ed573;
+        }
+
+        .form-input.valid::before, .form-select.valid::before {
+            background: conic-gradient(
+                from 0deg,
+                rgba(46, 213, 115, 1) 0deg,
+                rgba(123, 237, 159, 0.8) 15deg,
+                transparent 30deg,
+                transparent 330deg,
+                rgba(123, 237, 159, 0.8) 345deg,
+                rgba(46, 213, 115, 1) 360deg
+            );
+            animation: outlineChase 2s linear infinite;
+        }
+
+        /* Elegant separator */
+        .elegant-separator {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 215, 0, 0.3) 25%, 
+                rgba(255, 237, 78, 0.6) 50%, 
+                rgba(255, 215, 0, 0.3) 75%, 
+                transparent 100%);
+            margin: 35px 0;
+            animation: smoothSeparatorFlow 5s ease-in-out infinite;
+            border-radius: 10px;
+        }
+
+        @keyframes smoothSeparatorFlow {
+            0%, 100% { 
+                opacity: 0.4; 
+                transform: scaleX(0.3);
+                filter: blur(1px);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scaleX(1);
                 filter: blur(0px);
             }
         }
 
-        @keyframes luxuryGoldShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 200% 50%; }
-            75% { background-position: 100% 50%; }
+        /* Falling light rays */
+        .light-ray {
+            position: fixed;
+            width: 1px;
+            height: 150px;
+            background: linear-gradient(180deg, 
+                transparent 0%,
+                rgba(255, 215, 0, 0.6) 20%,
+                rgba(255, 237, 78, 0.9) 50%,
+                rgba(255, 215, 0, 0.6) 80%,
+                transparent 100%);
+            animation: rayFall 10s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.7;
         }
 
-        @keyframes starRotate {
-            0% { transform: translateY(-50%) rotate(0deg) scale(1); }
-            50% { transform: translateY(-50%) rotate(180deg) scale(1.2); }
-            100% { transform: translateY(-50%) rotate(360deg) scale(1); }
-        }
-
-        @keyframes subtitleGlow {
-            0%, 100% { 
-                opacity: 0.9; 
-                text-shadow: 0 0 20px rgba(204, 204, 204, 0.3);
-                transform: scale(1);
+        @keyframes rayFall {
+            0% { 
+                top: -200px; 
+                opacity: 0;
+                transform: translateX(0px) rotate(5deg);
             }
-            50% { 
-                opacity: 1; 
-                text-shadow: 0 0 30px rgba(204, 204, 204, 0.6);
-                transform: scale(1.02);
+            15% {
+                opacity: 0.8;
+                transform: translateX(20px) rotate(5deg);
+            }
+            50% {
+                transform: translateX(-10px) rotate(-2deg);
+            }
+            85% {
+                opacity: 0.8;
+                transform: translateX(15px) rotate(3deg);
+            }
+            100% { 
+                top: calc(100vh + 200px); 
+                opacity: 0;
+                transform: translateX(0px) rotate(5deg);
             }
         }
 
-        @keyframes cardMagicEntrance {
+        /* Cascading elements effect */
+        .cascade-down {
+            animation: cascadeDown 2s ease-out forwards;
+        }
+
+        @keyframes cascadeDown {
             0% {
                 opacity: 0;
-                transform: translateY(80px) rotateX(20deg) scale(0.8);
-                filter: blur(5px);
+                transform: translateY(-120px) rotateX(90deg) scale(0.8);
+                filter: blur(15px);
             }
-            70% {
-                opacity: 0.9;
-                transform: translateY(-10px) rotateX(0deg) scale(1.05);
-                filter: blur(1px);
+            50% {
+                opacity: 0.7;
+                transform: translateY(-20px) rotateX(30deg) scale(0.95);
+                filter: blur(5px);
             }
             100% {
                 opacity: 1;
@@ -575,236 +815,119 @@
             }
         }
 
-        @keyframes borderFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Floating orbs */
+        .floating-orb {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.9), rgba(255, 237, 78, 0.3));
+            animation: orbFloat 12s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        @keyframes cardAura {
-            0%, 100% { opacity: 0; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.02); }
-        }
-
-        @keyframes formGroupMagic {
-            from {
+        @keyframes orbFloat {
+            0% { 
+                top: -30px; 
                 opacity: 0;
-                transform: translateX(-50px) rotateY(15deg);
-                filter: blur(3px);
+                transform: scale(0.3) translateX(0px);
             }
-            to {
+            10% {
                 opacity: 1;
-                transform: translateX(0) rotateY(0deg);
-                filter: blur(0px);
+                transform: scale(1) translateX(15px);
             }
-        }
-
-        @keyframes labelIcon {
-            0%, 100% { opacity: 0; transform: translateY(-50%) scale(0.8); }
-            50% { opacity: 0.6; transform: translateY(-50%) scale(1.1); }
-        }
-
-        @keyframes labelIconActive {
-            0% { transform: translateY(-50%) scale(0.8) rotate(0deg); }
-            50% { transform: translateY(-50%) scale(1.3) rotate(180deg); }
-            100% { transform: translateY(-50%) scale(1.2) rotate(360deg); }
-        }
-
-        @keyframes inputGlow {
-            0% { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.15); }
-            50% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.3); }
-            100% { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.15); }
-        }
-
-        @keyframes buttonMagicEntrance {
-            0% {
-                opacity: 0;
-                transform: translateY(30px) scale(0.9);
-                filter: blur(3px);
+            20% {
+                transform: scale(1.3) translateX(-25px);
             }
-            60% {
-                opacity: 0.8;
-                transform: translateY(-5px) scale(1.1);
-                filter: blur(1px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0px);
-            }
-        }
-
-        @keyframes buttonPulse {
-            0% { transform: translateY(-8px) scale(1.05); }
-            50% { transform: translateY(-12px) scale(1.08); }
-            100% { transform: translateY(-8px) scale(1.05); }
-        }
-
-        @keyframes floatingMagic {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                box-shadow: 
-                    0 10px 30px rgba(37, 211, 102, 0.5),
-                    0 0 0 0 rgba(37, 211, 102, 0.8);
-            }
-            25% {
-                transform: translateY(-8px) rotate(5deg) scale(1.05);
+            35% {
+                transform: scale(0.7) translateX(30px);
             }
             50% {
-                transform: translateY(-5px) rotate(0deg) scale(1.1);
-                box-shadow: 
-                    0 15px 40px rgba(37, 211, 102, 0.7),
-                    0 0 0 15px rgba(37, 211, 102, 0);
+                transform: scale(1.1) translateX(-20px);
             }
-            75% {
-                transform: translateY(-8px) rotate(-5deg) scale(1.05);
+            65% {
+                transform: scale(0.9) translateX(25px);
             }
-        }
-
-        @keyframes chatRing {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-            100% { transform: scale(1.4); opacity: 0; }
-        }
-
-        @keyframes whatsappIcon {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.1) rotate(-5deg); }
-            75% { transform: scale(1.1) rotate(5deg); }
-        }
-
-        @keyframes footerMagic {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-                filter: blur(2px);
+            80% {
+                transform: scale(1.2) translateX(-15px);
             }
-            to {
+            90% {
                 opacity: 1;
-                transform: translateY(0);
-                filter: blur(0px);
+                transform: scale(0.8) translateX(10px);
             }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .title {
-                font-size: 2.5rem;
-                letter-spacing: 3px;
-            }
-            
-            .title::before,
-            .title::after {
-                font-size: 1.2rem;
-            }
-            
-            .form-card {
-                padding: 35px 25px;
-            }
-            
-            .floating-chat {
-                width: 60px;
-                height: 60px;
-                bottom: 25px;
-                right: 25px;
-            }
-            
-            .floating-chat i {
-                font-size: 1.5rem;
+            100% { 
+                top: calc(100vh + 50px); 
+                opacity: 0;
+                transform: scale(0.2) translateX(0px);
             }
         }
     </style>
 </head>
 <body>
+    <!-- Dynamic light rays -->
+    <div class="light-ray" style="left: 8%; animation-delay: 0s;"></div>
+    <div class="light-ray" style="left: 22%; animation-delay: 1.5s; height: 120px;"></div>
+    <div class="light-ray" style="left: 38%; animation-delay: 3s; height: 180px;"></div>
+    <div class="light-ray" style="left: 54%; animation-delay: 4.5s; height: 130px;"></div>
+    <div class="light-ray" style="left: 68%; animation-delay: 6s; height: 160px;"></div>
+    <div class="light-ray" style="left: 82%; animation-delay: 7.5s; height: 140px;"></div>
+    <div class="light-ray" style="left: 96%; animation-delay: 9s; height: 110px;"></div>
+
+    <!-- Floating orbs -->
+    <div class="floating-orb" style="left: 5%; animation-delay: 0s;"></div>
+    <div class="floating-orb" style="left: 20%; animation-delay: 2s;"></div>
+    <div class="floating-orb" style="left: 35%; animation-delay: 4s;"></div>
+    <div class="floating-orb" style="left: 50%; animation-delay: 6s;"></div>
+    <div class="floating-orb" style="left: 65%; animation-delay: 8s;"></div>
+    <div class="floating-orb" style="left: 80%; animation-delay: 10s;"></div>
+    <div class="floating-orb" style="left: 95%; animation-delay: 1s;"></div>
+
     <div class="container">
         <div class="header">
             <h1 class="title">SECRET AREA</h1>
             <p class="subtitle">Formulir Pendaftaran Eksklusif</p>
+            <div class="elegant-separator"></div>
         </div>
 
         <div class="form-card">
             <form id="registrationForm">
                 <div class="form-group">
                     <label class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-input" id="namaLengkap" placeholder="Masukkan nama lengkap Anda" required>
+                    <input type="text" class="form-input" name="namaLengkap" placeholder="Masukkan nama lengkap" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Nickname</label>
-                    <input type="text" class="form-input" id="nickname" placeholder="Masukkan nickname gaming" required>
+                    <input type="text" class="form-input" name="nickname" placeholder="Masukkan nickname" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">ID Game</label>
-                    <input type="text" class="form-input" id="idGame" placeholder="Masukkan ID Game Anda" required>
+                    <input type="text" class="form-input" name="idGame" placeholder="Masukkan ID Game" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Join Clan</label>
-                    <select class="form-select" id="joinClan" required>
-                        <option value="">Pilih Clan Tujuan</option>
-                        <option value="Clan OFFICIAL">🏆 Clan OFFICIAL</option>
-                        <option value="Clan Circle">⭕ Clan Circle</option>
+                    <select class="form-select" name="joinClan" required>
+                        <option value="">Pilih Clan</option>
+                        <option value="Clan OFFICIAL">Clan OFFICIAL</option>
+                        <option value="Clan Circle">Clan Circle</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Provinsi</label>
-                    <select class="form-select" id="provinsi" required>
-                        <option value="">Pilih Provinsi</option>
-                        <option value="Aceh">Aceh</option>
-                        <option value="Sumatera Utara">Sumatera Utara</option>
-                        <option value="Sumatera Barat">Sumatera Barat</option>
-                        <option value="Riau">Riau</option>
-                        <option value="Kepulauan Riau">Kepulauan Riau</option>
-                        <option value="Jambi">Jambi</option>
-                        <option value="Sumatera Selatan">Sumatera Selatan</option>
-                        <option value="Bangka Belitung">Bangka Belitung</option>
-                        <option value="Bengkulu">Bengkulu</option>
-                        <option value="Lampung">Lampung</option>
-                        <option value="DKI Jakarta">DKI Jakarta</option>
-                        <option value="Jawa Barat">Jawa Barat</option>
-                        <option value="Jawa Tengah">Jawa Tengah</option>
-                        <option value="DI Yogyakarta">DI Yogyakarta</option>
-                        <option value="Jawa Timur">Jawa Timur</option>
-                        <option value="Banten">Banten</option>
-                        <option value="Bali">Bali</option>
-                        <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                        <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                        <option value="Kalimantan Barat">Kalimantan Barat</option>
-                        <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                        <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                        <option value="Kalimantan Timur">Kalimantan Timur</option>
-                        <option value="Kalimantan Utara">Kalimantan Utara</option>
-                        <option value="Sulawesi Utara">Sulawesi Utara</option>
-                        <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                        <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                        <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                        <option value="Gorontalo">Gorontalo</option>
-                        <option value="Sulawesi Barat">Sulawesi Barat</option>
-                        <option value="Maluku">Maluku</option>
-                        <option value="Maluku Utara">Maluku Utara</option>
-                        <option value="Papua">Papua</option>
-                        <option value="Papua Barat">Papua Barat</option>
-                        <option value="Papua Selatan">Papua Selatan</option>
-                        <option value="Papua Tengah">Papua Tengah</option>
-                        <option value="Papua Pegunungan">Papua Pegunungan</option>
-                        <option value="Papua Barat Daya">Papua Barat Daya</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Kota</label>
-                    <input type="text" class="form-input" id="kota" placeholder="Masukkan nama kota" required>
+                    <label class="form-label">Domisili</label>
+                    <div class="domisili-group">
+                        <input type="text" class="form-input" name="provinsi" placeholder="Provinsi" required>
+                        <input type="text" class="form-input" name="kota" placeholder="Kota" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Usia</label>
-                    <div class="age-group">
-                        <select class="form-select" id="bulan" required>
+                    <div class="usia-group">
+                        <select class="form-select" name="bulan" required>
                             <option value="">Bulan</option>
                             <option value="Januari">Januari</option>
                             <option value="Februari">Februari</option>
@@ -819,8 +942,7 @@
                             <option value="November">November</option>
                             <option value="Desember">Desember</option>
                         </select>
-                        
-                        <select class="form-select" id="tahun" required>
+                        <select class="form-select" name="tahun" required>
                             <option value="">Tahun</option>
                         </select>
                     </div>
@@ -828,317 +950,612 @@
 
                 <div class="form-group">
                     <label class="form-label">Link TikTok</label>
-                    <input type="url" class="form-input" id="linkTiktok" placeholder="https://www.tiktok.com/@username" required>
+                    <input type="url" class="form-input" name="linkTiktok" placeholder="https://tiktok.com/@username" required>
                 </div>
 
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-user-plus"></i> Daftar Sekarang
-                </button>
+                <button type="submit" class="submit-btn">Daftar</button>
             </form>
         </div>
-    </div>
 
-    <!-- Floating Chat Button -->
-    <div class="floating-chat" onclick="openRandomWhatsApp()">
-        <i class="fab fa-whatsapp"></i>
-        <div class="tooltip">💬 Chat Admin</div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <div class="social-icons">
-            <a href="#" class="social-icon" onclick="openTiktok()">
-                <i class="fab fa-tiktok"></i>
-            </a>
-            <a href="#" class="social-icon" onclick="openInstagram()">
-                <i class="fab fa-instagram"></i>
-            </a>
+        <div class="footer scroll-animate">
+            <div class="social-icons">
+                <a href="https://www.tiktok.com/@sear_officialreal?is_from_webapp=1&sender_device=pc" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/sear_pubgmobile/?igsh=NDJvM2thYXV4YTNy" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="footer-note">NOTE: Wajib mengikuti semua social media official SECRET AREA</p>
+            <div class="elegant-separator"></div>
+            <p class="copyright">© 2025 SECRET AREA. All Rights Reserved.</p>
         </div>
-        
-        <p class="note">
-            <strong>⚠️ PENTING:</strong> Wajib mengikuti semua social media official SECRET AREA untuk mendapatkan update terbaru dan informasi eksklusif
-        </p>
-        
-        <p class="copyright">
-            ✨ © 2025 SECRET AREA. All Rights Reserved. ✨
-        </p>
     </div>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float" onclick="openWhatsAppDirect()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
 
     <script>
-        // Generate years for age dropdown (from 1960 to current year)
-        const tahunSelect = document.getElementById('tahun');
-        const currentYear = new Date().getFullYear();
-        
-        for (let year = currentYear; year >= 1960; year--) {
-            const option = document.createElement('option');
-            option.value = year;
-            option.textContent = year;
-            tahunSelect.appendChild(option);
+        // Create floating orbs dynamically
+        function createFloatingOrbs() {
+            for(let i = 0; i < 12; i++) {
+                const orb = document.createElement('div');
+                orb.className = 'floating-orb';
+                orb.style.cssText = `
+                    position: fixed;
+                    width: ${Math.random() * 6 + 4}px;
+                    height: ${Math.random() * 6 + 4}px;
+                    left: ${Math.random() * 100}%;
+                    border-radius: 50%;
+                    background: radial-gradient(circle, rgba(255, 215, 0, ${Math.random() * 0.6 + 0.4}), rgba(255, 237, 78, 0.2));
+                    animation: orbFloat ${Math.random() * 8 + 10}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 5}s;
+                    pointer-events: none;
+                    z-index: -1;
+                `;
+                document.body.appendChild(orb);
+            }
         }
 
-        // Admin WhatsApp numbers
+        // Create additional light rays
+        function createLightRays() {
+            for(let i = 0; i < 15; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'light-ray';
+                ray.style.cssText = `
+                    position: fixed;
+                    width: ${Math.random() * 2 + 1}px;
+                    height: ${Math.random() * 100 + 80}px;
+                    left: ${Math.random() * 100}%;
+                    background: linear-gradient(180deg, 
+                        transparent 0%,
+                        rgba(255, 215, 0, ${Math.random() * 0.4 + 0.3}) 20%,
+                        rgba(255, 237, 78, ${Math.random() * 0.6 + 0.4}) 50%,
+                        rgba(255, 215, 0, ${Math.random() * 0.4 + 0.3}) 80%,
+                        transparent 100%);
+                    animation: rayFall ${Math.random() * 6 + 8}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 8}s;
+                    pointer-events: none;
+                    z-index: -1;
+                    opacity: 0.6;
+                `;
+                document.body.appendChild(ray);
+            }
+        }
+
+        // Initialize year dropdown
+        function initializeYear() {
+            const yearSelect = document.querySelector('select[name="tahun"]');
+            const currentYear = new Date().getFullYear();
+            
+            for(let year = currentYear; year >= currentYear - 50; year--) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+            }
+        }
+
+        // Admin phone numbers
         const adminNumbers = ['6287732771561', '6285272535526'];
 
-        // Function to get random admin number
-        function getRandomAdminNumber() {
-            const randomIndex = Math.floor(Math.random() * adminNumbers.length);
-            return adminNumbers[randomIndex];
-        }
-
-        // Function to get current time
-        function getCurrentTime() {
-            const now = new Date();
-            const options = { 
-                day: 'numeric', 
-                month: 'long', 
-                year: 'numeric', 
-                hour: '2-digit', 
-                minute: '2-digit',
-                timeZone: 'Asia/Jakarta'
-            };
-            return now.toLocaleDateString('id-ID', options);
-        }
-
-        // Function to open random WhatsApp
-        function openRandomWhatsApp() {
-            const adminNumber = getRandomAdminNumber();
-            const currentTime = getCurrentTime();
-            const message = `🔥 HALO ADMIN SECRET AREA! 🔥
-
-Selamat ${getGreeting()}! Saya ingin bertanya mengenai pendaftaran clan.
-
-⏰ Waktu: ${currentTime}
-🎯 Keperluan: Informasi Pendaftaran SECRET AREA
-💬 Status: Calon Member Baru
-
-Mohon informasinya ya admin! Terima kasih 🙏✨`;
+        // Show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
             
-            const whatsappUrl = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 6000);
         }
 
-        // Function to get greeting based on time
-        function getGreeting() {
-            const hour = new Date().getHours();
-            if (hour < 12) return "Pagi";
-            if (hour < 15) return "Siang";
-            if (hour < 18) return "Sore";
-            return "Malam";
-        }
-
-        // Function to open TikTok
-        function openTiktok() {
-            window.open('https://www.tiktok.com/@sear_officialreal?is_from_webapp=1&sender_device=pc', '_blank');
-        }
-
-        // Function to open Instagram
-        function openInstagram() {
-            window.open('https://www.instagram.com/sear_pubgmobile/?igsh=NDJvM2thYXV4YTNy', '_blank');
+        // Validate individual field
+        function validateField(field) {
+            const value = field.value.trim();
+            
+            field.classList.remove('invalid', 'valid');
+            
+            setTimeout(() => {
+                if (field.required && !value) {
+                    field.classList.add('invalid');
+                    return false;
+                }
+                
+                if (field.name === 'linkTiktok' && value && !value.includes('tiktok.com')) {
+                    field.classList.add('invalid');
+                    return false;
+                }
+                
+                if (value) {
+                    field.classList.add('valid');
+                }
+            }, 100);
+            
+            return value !== '' || !field.required;
         }
 
         // Form submission handler
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Add loading animation to button
-            const submitBtn = document.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses Data...';
-            submitBtn.style.pointerEvents = 'none';
-            submitBtn.style.background = 'linear-gradient(135deg, #cccccc, #999999)';
-            
-            // Get form data
-            const namaLengkap = document.getElementById('namaLengkap').value;
-            const nickname = document.getElementById('nickname').value;
-            const idGame = document.getElementById('idGame').value;
-            const joinClan = document.getElementById('joinClan').value;
-            const provinsi = document.getElementById('provinsi').value;
-            const kota = document.getElementById('kota').value;
-            const bulan = document.getElementById('bulan').value;
-            const tahun = document.getElementById('tahun').value;
-            const linkTiktok = document.getElementById('linkTiktok').value;
-            
             // Validate all fields
-            if (!namaLengkap || !nickname || !idGame || !joinClan || !provinsi || !kota || !bulan || !tahun || !linkTiktok) {
-                alert('❌ Mohon lengkapi semua field yang diperlukan untuk melanjutkan pendaftaran!');
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.pointerEvents = 'auto';
-                submitBtn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffc107 50%, #ffb300 75%, #ffd700 100%)';
-                return;
-            }
-            
-            // Format domicile and age
-            const domisili = `${kota}, ${provinsi}`;
-            const usia = `${bulan} ${tahun}`;
-            const currentTime = getCurrentTime();
-            
-            // Create enhanced WhatsApp message
-            const message = `🎮 FORMULIR PENDAFTARAN SECRET AREA 🎮
-
-═══════════════════════════════
-📋 DATA PENDAFTAR
-═══════════════════════════════
-
-👤 Nama Lengkap: ${namaLengkap}
-🎯 Nickname: ${nickname}
-🆔 ID Game: ${idGame}
-🏆 Join Clan: ${joinClan}
-📍 Domisili: ${domisili}
-🎂 Usia: ${usia}
-📱 Link TikTok: ${linkTiktok}
-
-⏰ Waktu Pendaftaran: ${currentTime}
-🌟 Status: PENDAFTAR BARU
-
-═══════════════════════════════
-💼 ADMIN MOHON SEGERA DIPROSES
-═══════════════════════════════
-
-Terima kasih admin! 🙏✨
-
-#SECRETAREA #Gaming #Pendaftaran`;
-            
-            // Get random admin number
-            const adminNumber = getRandomAdminNumber();
-            
-            // Simulate processing time with realistic delay
-            setTimeout(() => {
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> Berhasil! Membuka WhatsApp...';
-                submitBtn.style.background = 'linear-gradient(135deg, #25D366, #128C7E)';
-                
-                setTimeout(() => {
-                    // Open WhatsApp with the enhanced message
-                    const whatsappUrl = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
-                    window.open(whatsappUrl, '_blank');
-                    
-                    // Reset button after WhatsApp opens
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.style.pointerEvents = 'auto';
-                        submitBtn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffc107 50%, #ffb300 75%, #ffd700 100%)';
-                        
-                        // Show success message
-                        alert('✅ Data berhasil dikirim ke admin! Silakan cek WhatsApp Anda.');
-                    }, 2000);
-                }, 1000);
-            }, 2000);
-        });
-
-        // Enhanced input interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('.form-input, .form-select');
+            const inputs = this.querySelectorAll('.form-input, .form-select');
+            let isValid = true;
             
             inputs.forEach((input, index) => {
-                // Add enhanced typing effect
-                input.addEventListener('input', function() {
-                    this.style.boxShadow = '0 0 25px rgba(255, 215, 0, 0.5)';
-                    this.style.borderColor = '#ffed4e';
-                    
-                    setTimeout(() => {
-                        if (!this.matches(':focus')) {
-                            this.style.boxShadow = '';
-                            this.style.borderColor = 'rgba(255, 215, 0, 0.3)';
-                        }
-                    }, 500);
-                });
-
-                // Add premium focus transitions
-                input.addEventListener('focus', function() {
-                    this.parentElement.style.transform = 'translateZ(15px) rotateY(2deg)';
-                    this.parentElement.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.style.transform = 'translateZ(0) rotateY(0deg)';
-                });
+                setTimeout(() => {
+                    if (!validateField(input)) {
+                        isValid = false;
+                    }
+                }, index * 100);
             });
-
-            // Add page completion effect
+            
             setTimeout(() => {
-                document.body.style.opacity = '1';
-                document.body.style.transform = 'scale(1)';
-            }, 100);
+                if (!isValid) {
+                    showNotification('Mohon periksa dan lengkapi semua field dengan benar!');
+                    return;
+                }
+                
+                // Add loading state
+                document.body.classList.add('loading');
+                
+                // Get form data
+                const formData = new FormData(this);
+                const data = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value.trim();
+                }
+                
+                // Combine domisili
+                const domisili = `${data.provinsi}, ${data.kota}`;
+                
+                // Combine usia
+                const usia = `${data.bulan} ${data.tahun}`;
+                
+                // Create WhatsApp message
+                const message = `Formulir Pendaftaran SECRET AREA
+
+Nama Lengkap: ${data.namaLengkap}
+Nickname: ${data.nickname}
+ID Game: ${data.idGame}
+Join Clan: ${data.joinClan}
+Domisili: ${domisili}
+Usia: ${usia}
+Link TikTok: ${data.linkTiktok}
+
+Terima kasih telah mendaftar!`;
+
+                // Random admin selection
+                const randomAdmin = adminNumbers[Math.floor(Math.random() * adminNumbers.length)];
+                
+                // Open WhatsApp after delay
+                setTimeout(() => {
+                    const whatsappUrl = `https://wa.me/${randomAdmin}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Remove loading state
+                    document.body.classList.remove('loading');
+                    
+                    // Show success message
+                    showNotification('Formulir berhasil dikirim! Anda akan diarahkan ke WhatsApp admin.');
+                    
+                    // Reset form after successful submission
+                    setTimeout(() => {
+                        this.reset();
+                        inputs.forEach(input => {
+                            input.classList.remove('valid', 'invalid');
+                        });
+                    }, 4000);
+                }, 2500);
+            }, inputs.length * 100 + 500);
         });
 
-        // Enhanced mouse parallax effect for desktop
-        if (window.innerWidth > 768) {
-            document.addEventListener('mousemove', function(e) {
-                const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-                const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        // WhatsApp floating button
+        function openWhatsAppDirect() {
+            const randomAdmin = adminNumbers[Math.floor(Math.random() * adminNumbers.length)];
+            const message = 'Halo Admin SECRET AREA! Saya ingin bertanya tentang pendaftaran.';
+            const whatsappUrl = `https://wa.me/${randomAdmin}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Scroll animation
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 120;
                 
-                document.querySelector('.form-card').style.transform = 
-                    `translate3d(${mouseX * 8}px, ${mouseY * 8}px, 0) rotateY(${mouseX * 3}deg) rotateX(${mouseY * 3}deg)`;
-                
-                document.querySelector('.header').style.transform = 
-                    `translate3d(${mouseX * 5}px, ${mouseY * 5}px, 0)`;
-                
-                document.querySelector('.floating-chat').style.transform = 
-                    `translate3d(${mouseX * -10}px, ${mouseY * -10}px, 0)`;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    setTimeout(() => {
+                        element.classList.add('visible');
+                    }, 200);
+                }
             });
         }
 
-        // Add scroll animations
-        window.addEventListener('scroll', function() {
-            const scrollY = window.scrollY;
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollProgress = scrollY / maxScroll;
+        // Add input validation feedback
+        function addInputValidation() {
+            const inputs = document.querySelectorAll('.form-input, .form-select');
             
-            document.body.style.background = `
-                linear-gradient(135deg, 
-                    hsl(0, 0%, ${4 + scrollProgress * 10}%) 0%, 
-                    hsl(0, 0%, ${10 + scrollProgress * 15}%) 25%, 
-                    hsl(0, 0%, ${18 + scrollProgress * 20}%) 50%, 
-                    hsl(0, 0%, ${10 + scrollProgress * 15}%) 75%, 
-                    hsl(0, 0%, ${4 + scrollProgress * 10}%) 100%)
-            `;
-        });
-
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Alt + W to open WhatsApp
-            if (e.altKey && e.key === 'w') {
-                e.preventDefault();
-                openRandomWhatsApp();
-            }
-            
-            // Alt + T to open TikTok
-            if (e.altKey && e.key === 't') {
-                e.preventDefault();
-                openTiktok();
-            }
-            
-            // Alt + I to open Instagram
-            if (e.altKey && e.key === 'i') {
-                e.preventDefault();
-                openInstagram();
-            }
-        });
-
-        // Add form auto-save to localStorage
-        const form = document.getElementById('registrationForm');
-        const formInputs = form.querySelectorAll('input, select');
-
-        formInputs.forEach(input => {
-            // Load saved data
-            const savedValue = localStorage.getItem(`secret_area_${input.id}`);
-            if (savedValue && savedValue !== 'null') {
-                input.value = savedValue;
-            }
-
-            // Save data on input
-            input.addEventListener('input', function() {
-                localStorage.setItem(`secret_area_${input.id}`, input.value);
-            });
-        });
-
-        // Clear saved data after successful submission
-        form.addEventListener('submit', function() {
-            setTimeout(() => {
-                formInputs.forEach(input => {
-                    localStorage.removeItem(`secret_area_${input.id}`);
+            inputs.forEach((input, index) => {
+                input.addEventListener('blur', function() {
+                    setTimeout(() => {
+                        validateField(this);
+                    }, 150);
                 });
+                
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('invalid')) {
+                        setTimeout(() => {
+                            validateField(this);
+                        }, 300);
+                    }
+                });
+                
+                input.addEventListener('focus', function() {
+                    this.style.transform = 'scale(1.02) translateY(-2px)';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.style.transform = 'scale(1) translateY(0)';
+                });
+            });
+        }
+
+        // Enhanced form interactions
+        function enhanceFormInteractions() {
+            const formGroups = document.querySelectorAll('.form-group');
+            
+            formGroups.forEach((group, index) => {
+                group.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.01) translateY(-3px)';
+                    this.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    this.style.filter = 'brightness(1.05)';
+                });
+                
+                group.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) translateY(0)';
+                    this.style.filter = 'brightness(1)';
+                });
+            });
+        }
+
+        // Add elegant typing effect
+        function addTypingEffect() {
+            const inputs = document.querySelectorAll('.form-input[placeholder]');
+            
+            inputs.forEach(input => {
+                const originalPlaceholder = input.getAttribute('placeholder');
+                let currentPlaceholder = '';
+                let isTyping = false;
+                
+                input.addEventListener('focus', function() {
+                    if (!isTyping && this.value === '') {
+                        isTyping = true;
+                        this.setAttribute('placeholder', '');
+                        currentPlaceholder = '';
+                        
+                        let i = 0;
+                        const typeInterval = setInterval(() => {
+                            currentPlaceholder += originalPlaceholder[i];
+                            this.setAttribute('placeholder', currentPlaceholder + '|');
+                            i++;
+                            
+                            if (i >= originalPlaceholder.length) {
+                                setTimeout(() => {
+                                    this.setAttribute('placeholder', currentPlaceholder);
+                                }, 500);
+                                clearInterval(typeInterval);
+                                isTyping = false;
+                            }
+                        }, 80);
+                    }
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.value === '') {
+                        currentPlaceholder = '';
+                        this.setAttribute('placeholder', originalPlaceholder);
+                    }
+                });
+            });
+        }
+
+        // Create cascading elements effect
+        function createCascadingElements() {
+            setInterval(() => {
+                for(let i = 0; i < 3; i++) {
+                    const cascadeElement = document.createElement('div');
+                    cascadeElement.style.cssText = `
+                        position: fixed;
+                        top: -50px;
+                        left: ${Math.random() * 100}%;
+                        width: ${Math.random() * 20 + 10}px;
+                        height: ${Math.random() * 20 + 10}px;
+                        background: radial-gradient(circle, rgba(255, 215, 0, 0.6), transparent);
+                        border-radius: ${Math.random() > 0.5 ? '50%' : '20%'};
+                        pointer-events: none;
+                        z-index: -1;
+                        animation: cascadeElementFall ${Math.random() * 5 + 8}s ease-in-out forwards;
+                    `;
+                    document.body.appendChild(cascadeElement);
+                    
+                    setTimeout(() => {
+                        cascadeElement.remove();
+                    }, 15000);
+                }
+            }, 2000);
+        }
+
+        // Cascade element fall animation
+        const cascadeStyle = document.createElement('style');
+        cascadeStyle.textContent = `
+            @keyframes cascadeElementFall {
+                0% { 
+                    top: -50px; 
+                    opacity: 0;
+                    transform: rotate(0deg) scale(0.5);
+                }
+                10% {
+                    opacity: 1;
+                    transform: rotate(45deg) scale(1);
+                }
+                50% {
+                    transform: rotate(180deg) scale(1.2);
+                }
+                90% {
+                    opacity: 1;
+                    transform: rotate(315deg) scale(0.8);
+                }
+                100% { 
+                    top: calc(100vh + 100px); 
+                    opacity: 0;
+                    transform: rotate(360deg) scale(0.3);
+                }
+            }
+        `;
+        document.head.appendChild(cascadeStyle);
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeYear();
+            addInputValidation();
+            enhanceFormInteractions();
+            addTypingEffect();
+            handleScrollAnimation();
+            createFloatingOrbs();
+            createLightRays();
+            createCascadingElements();
+            
+            // Staggered cascade animation for form groups
+            const formGroups = document.querySelectorAll('.form-group');
+            formGroups.forEach((group, index) => {
+                setTimeout(() => {
+                    group.classList.add('cascade-down');
+                }, (index * 200) + 1500);
+            });
+            
+            setTimeout(() => {
+                showNotification('Selamat datang di SECRET AREA! Silakan lengkapi formulir pendaftaran.');
+            }, 4000);
+        });
+
+        // Handle scroll events
+        window.addEventListener('scroll', handleScrollAnimation);
+
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+                e.preventDefault();
+                const form = e.target.closest('form');
+                const inputs = Array.from(form.querySelectorAll('input, select'));
+                const currentIndex = inputs.indexOf(e.target);
+                const nextInput = inputs[currentIndex + 1];
+                
+                if (nextInput) {
+                    setTimeout(() => {
+                        nextInput.focus();
+                    }, 200);
+                } else {
+                    setTimeout(() => {
+                        form.querySelector('button[type="submit"]').focus();
+                    }, 200);
+                }
+            }
+        });
+
+        // Enhanced click effect for submit button
+        document.querySelector('.submit-btn').addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height) * 1.5;
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: smoothRipple 1s cubic-bezier(0.4, 0, 0.2, 1);
+                pointer-events: none;
+                z-index: 1;
+            `;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+        });
+
+        // Add smooth ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes smoothRipple {
+                0% {
+                    transform: scale(0);
+                    opacity: 0.8;
+                }
+                50% {
+                    transform: scale(0.5);
+                    opacity: 0.4;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Auto-save functionality
+        function autoSaveForm() {
+            const form = document.getElementById('registrationForm');
+            const inputs = form.querySelectorAll('input, select');
+            
+            inputs.forEach((input, index) => {
+                const savedValue = localStorage.getItem(`secretarea_${input.name}`);
+                if (savedValue && input.type !== 'submit') {
+                    setTimeout(() => {
+                        input.value = savedValue;
+                        validateField(input);
+                    }, index * 100);
+                }
+                
+                input.addEventListener('input', function() {
+                    localStorage.setItem(`secretarea_${this.name}`, this.value);
+                });
+            });
+        }
+
+        // Initialize auto-save
+        document.addEventListener('DOMContentLoaded', function() {
+            autoSaveForm();
+        });
+
+        // Add more falling effects on interaction
+        function createInteractionEffects() {
+            const interactiveElements = document.querySelectorAll('.form-input, .form-select, .submit-btn');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    // Create small falling particles on hover
+                    for(let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const particle = document.createElement('div');
+                            const rect = this.getBoundingClientRect();
+                            particle.style.cssText = `
+                                position: fixed;
+                                left: ${rect.left + Math.random() * rect.width}px;
+                                top: ${rect.top - 20}px;
+                                width: 3px;
+                                height: 3px;
+                                background: rgba(255, 215, 0, 0.8);
+                                border-radius: 50%;
+                                pointer-events: none;
+                                z-index: 1000;
+                                animation: miniParticleFall 2s ease-out forwards;
+                            `;
+                            document.body.appendChild(particle);
+                            
+                            setTimeout(() => {
+                                particle.remove();
+                            }, 2000);
+                        }, i * 200);
+                    }
+                });
+            });
+        }
+
+        // Mini particle fall animation
+        const miniParticleStyle = document.createElement('style');
+        miniParticleStyle.textContent = `
+            @keyframes miniParticleFall {
+                0% { 
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+                100% { 
+                    opacity: 0;
+                    transform: translateY(100px) scale(0.2);
+                }
+            }
+        `;
+        document.head.appendChild(miniParticleStyle);
+
+        // Initialize interaction effects
+        document.addEventListener('DOMContentLoaded', function() {
+            createInteractionEffects();
+        });
+
+        // Add periodic cascade bursts
+        function createPeriodicCascade() {
+            setInterval(() => {
+                for(let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const burst = document.createElement('div');
+                        burst.style.cssText = `
+                            position: fixed;
+                            top: -30px;
+                            left: ${i * 12.5}%;
+                            width: 6px;
+                            height: 6px;
+                            background: radial-gradient(circle, rgba(255, 215, 0, 0.9), rgba(255, 237, 78, 0.4));
+                            border-radius: 50%;
+                            pointer-events: none;
+                            z-index: -1;
+                            animation: burstFall ${Math.random() * 3 + 4}s ease-out forwards;
+                        `;
+                        document.body.appendChild(burst);
+                        
+                        setTimeout(() => {
+                            burst.remove();
+                        }, 8000);
+                    }, i * 100);
+                }
             }, 5000);
+        }
+
+        // Burst fall animation
+        const burstStyle = document.createElement('style');
+        burstStyle.textContent = `
+            @keyframes burstFall {
+                0% { 
+                    top: -30px; 
+                    opacity: 0;
+                    transform: scale(0.5) rotate(0deg);
+                }
+                15% {
+                    opacity: 1;
+                    transform: scale(1.2) rotate(90deg);
+                }
+                85% {
+                    opacity: 1;
+                    transform: scale(0.8) rotate(270deg);
+                }
+                100% { 
+                    top: calc(100vh + 50px); 
+                    opacity: 0;
+                    transform: scale(0.3) rotate(360deg);
+                }
+            }
+        `;
+        document.head.appendChild(burstStyle);
+
+        // Start periodic cascade
+        document.addEventListener('DOMContentLoaded', function() {
+            createPeriodicCascade();
         });
     </script>
 </body>
 </html>
+
